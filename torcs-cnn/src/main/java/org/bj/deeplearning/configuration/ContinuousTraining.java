@@ -1,5 +1,6 @@
 package org.bj.deeplearning.configuration;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,8 +43,8 @@ public abstract class ContinuousTraining implements Trainable {
 	protected void saveModel(MultiLayerNetwork model, int numeration) {
         if(saveModel) {
             try {
-				ModelSerializer.writeModel(model, FileSystem.getPathOfModelFile(numeration).toString(), true);
-			} catch (IOException e) {
+				ModelSerializer.writeModel(model, new File(FileSystem.getPathOfModelFile(numeration).toString()), true);
+            } catch (IOException e) {
 				e.printStackTrace();
 			}
         }
@@ -65,10 +66,14 @@ public abstract class ContinuousTraining implements Trainable {
         saveModel = projectProperties.getProperty("training.saveModel").equals("true");
         initConfig();
         initNetwork();
+
+
 	}
 
 	protected void initConfig() {
-		configuration = BuilderFactory.getConvNet(height, width, featureCount).build();
+		//configuration = BuilderFactory.getConvNet(height, width, featureCount).build();
+		configuration = BuilderFactory.getShallowConvNet(height, width, featureCount).build();
+
 	}
 
 	protected void initNetwork() throws FileNotFoundException, IOException {

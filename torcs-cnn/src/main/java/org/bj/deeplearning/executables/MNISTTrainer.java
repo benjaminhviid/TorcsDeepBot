@@ -41,8 +41,6 @@ public class MNISTTrainer {
 //				e.printStackTrace();
 //			}
         }
-		
-		
 	}
 	
 	private static void init() {

@@ -17,15 +17,6 @@ import java.util.stream.Stream;
  **/
 
 public class TrainingDataHandler {
-
-    private static final TrainingDataHandler _instance = new TrainingDataHandler();
-
-    private TrainingDataHandler(){ }
-
-    public static TrainingDataHandler instance(){
-        return _instance;
-    }
-
     //
     public static final String TRAINING_DATA_PATH = TrainingDataHandler.class.getClassLoader().getResource("torcsdata/trainingdata.csv").getPath();
 
@@ -41,15 +32,6 @@ public class TrainingDataHandler {
         for (String header : headers){
             System.out.println(header);
         }
-
-        /*System.out.println("Num of images: " + getTotalNumberOfImages());
-        System.out.println("Number of ground truths: " + getNumberOfGroundTruths());
-        System.out.println("Random indices" + getRandomIndices(100));
-        getRandomIndicesToList(100).forEach(System.out::println);
-*/
-        List<TrainingData> training_data = getRandomTrainingData(10);
-        //training_data.forEach(sample->System.out.println(sample.getSpeed()));
-
 
     }
 
@@ -92,8 +74,6 @@ public class TrainingDataHandler {
             return -1;
         }
     }
-
-
 
     public static int getTotalNumberOfImages (){
 
@@ -149,7 +129,6 @@ public class TrainingDataHandler {
     }
 
     public static int getWidthHeightProduct(){
-
         return getWidth() * getHeight();
     }
 
@@ -178,9 +157,6 @@ public class TrainingDataHandler {
     public static String[] getSample(int id){
 
         try (Stream<String> lines = Files.lines(Paths.get(TRAINING_DATA_PATH))) {
-            //if (id == 0)
-            //return lines.skip(1).findFirst().get().split(";"); // skip header
-
             return lines.skip(id-1).findFirst().get().split(";");
 
         }
@@ -191,43 +167,9 @@ public class TrainingDataHandler {
         }
     }
 
-    public static String getRandomIndices(int numberOfImages) {
-        List<Integer> range = IntStream.rangeClosed(0, getSampleCount()).boxed().collect(Collectors.toList());
-        Collections.shuffle(range);
-        return indicesToString(range.parallelStream(), numberOfImages);
-    }
-
-    public static String getIndices(int from, int to) {
-        return indicesToString(IntStream.rangeClosed(from, to).boxed(), to-from + 1);
-    }
-
-
-    // Converts an array of indices to a string
-    private static String indicesToString(Stream<Integer> indices, int limit) {
-        return "(" + indices.limit(limit).map(Object::toString).collect(Collectors.joining(", ")) + ")";
-    }
-
-
-    public static List<String> getIndicesToList(int from, int to){
-        return indicesToList(IntStream.rangeClosed(from, to).boxed(), to-from + 1);
-    }
-
-    public static List<String> getRandomIndicesToList(int numberOfIndices){
-        List<Integer> range = IntStream.rangeClosed(0, getSampleCount()).boxed().collect(Collectors.toList());
-        Collections.shuffle(range);
-        return  indicesToList(range.parallelStream(), numberOfIndices);
-    }
-
-    private static List<String> indicesToList(Stream<Integer> indices, int limit){
-        return indices.limit(limit).map(Object::toString).collect(Collectors.toList());
-    }
-
-
-
     private static List<Integer> indicesToIntList(Stream<Integer> indices, int limit){
         return indices.limit(limit).collect(Collectors.toList());
     }
-
 
     public static List<Integer> getIndicesToIntList(int from, int to){
         return indicesToIntList(IntStream.rangeClosed(from, to).boxed(), to-from + 1);

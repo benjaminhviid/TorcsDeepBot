@@ -22,7 +22,7 @@ public class Evaluator {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		Trainer.init();
-		FileSystem.createFolders();
+		FileSystem.createModelsFolders();
 		Path modelPath;
 		if(args.length != 1) {
 			modelPath = FileSystem.getPathOfLatestModelFile();
@@ -30,12 +30,9 @@ public class Evaluator {
 			modelPath = FileSystem.getPathOfModelFile(Integer.parseInt(args[0]));
 		}
 		MultiLayerNetwork network = ModelSerializer.restoreMultiLayerNetwork(new FileInputStream(modelPath.toFile()));
+		System.out.println(network.getLayerWiseConfigurations().toString());
 		System.out.format("Evaluating model %s \n", modelPath.toString());
-
-        // CSVIterator dataIter = new CSVIterator();
-		//network.evaluate(dataIter);
 		double accuracy = getAccuracy(network);
-		//System.out.format("Hit rate: %f%%\n", accuracy*100);
 	}
 
 	public static double getAccuracy(MultiLayerNetwork network) throws IOException {
@@ -55,13 +52,10 @@ public class Evaluator {
 			int toId = Math.min(fromId + BATCH_SIZE, lastId);
 			testSet = FileSystem.load(fromId, toId);
 			for(TrainingData td : testSet) {
-			    System.out.println(td.getId());
+			    System.out.println("Test id: " + td.getId());
 				double[] groundTruths = td.getFeatures();
+                INDArray in = Nd4j.create(ImageTool.toScaledDoubles(td.getPixelData()), new int[] {1, 3, td.getWidth(), td.getHeight()});
 
-				System.out.println(ImageTool.toScaledDoubles(td.getPixelData()).length);
-				System.out.println(td.getWidth() + " " + td.getHeight());
-
-                INDArray in = Nd4j.create(ImageTool.toScaledDoubles(td.getPixelData()), new int[] { 8, 3, td.getWidth(), td.getHeight()});
                 INDArray output = network.output(in, false);
                 System.out.println(output);
 /*

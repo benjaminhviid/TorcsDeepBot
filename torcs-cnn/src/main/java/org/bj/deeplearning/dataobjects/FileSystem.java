@@ -84,7 +84,7 @@ public class FileSystem {
 
 		for(int i = 1; i <= maxId; i++) {
 			if(!FileSystem.exists(i)) {
-				List<TrainingData> images = TrainingDataHandler.instance().getTrainingData(i, i);
+				List<TrainingData> images = TrainingDataHandler.getTrainingData(i, i);
 				FileSystem.persist(images);
 				if(FileSystem.exists(i)) {
 					System.out.format("Successfully downloaded locally missing training data with id %d \n", i);
@@ -149,7 +149,7 @@ public class FileSystem {
 		try {
 			//byte[] pixelData = Files.readAllBytes(getPixelDataPath(id));
 			//List<String> lines = Files.readAllLines(getFeaturePath(id));
-			String[] lines = TrainingDataHandler.instance().getSample(id); // plus one to avoid header
+			String[] lines = TrainingDataHandler.getSample(id); // plus one to avoid header
 
 			int index = 0;
 
@@ -236,6 +236,12 @@ public class FileSystem {
 		Files.createDirectories(getTrainingDataFolder());
 		Files.createDirectories(getFeatureFolder());
 		Files.createDirectories(getPixelDataFolder());
+	}
+
+	public static void createModelsFolders() throws IOException {
+
+		Files.createDirectories(getModelsFolder());
+		Files.createDirectories(getContinuousFolder());
 	}
 
 	private static Path getFeaturePath(int id) {
