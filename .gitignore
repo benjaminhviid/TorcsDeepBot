@@ -25,7 +25,7 @@ README.md~
 .pydevproject
 release.properties
 .idea/
-torcs-cnn/.idea/*
+/torcs-cnn/.idea/*
 *.iml
 *.prefs
 *.settings/*
