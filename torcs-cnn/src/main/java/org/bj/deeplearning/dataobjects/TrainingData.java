@@ -1,8 +1,9 @@
 package org.bj.deeplearning.dataobjects;
 
 import org.bj.deeplearning.tools.ImageTool;
+import static org.bj.deeplearning.tools.Utils.clamp;
+import static org.bj.deeplearning.tools.Utils.map;
 
-import java.io.File;
 
 public class TrainingData {
 
@@ -140,12 +141,4 @@ public class TrainingData {
 		return dist_RR;
 	}
 
-	double map(double s, double a1, double a2, double b1, double b2)
-	{
-		return b1 + (s-a1)*(b2-b1)/(a2-a1);
-	}
-
-	double clamp (double value, double min, double max){
-		return Math.max(min, Math.min(max, value));
-	}
 }

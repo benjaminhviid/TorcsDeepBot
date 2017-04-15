@@ -1,7 +1,6 @@
 package itu.bj.torcs;
 
 import com.anji.integration.Activator;
-import itu.bj.torcs.Controller;
 
 public class NEATController extends Controller{
 	

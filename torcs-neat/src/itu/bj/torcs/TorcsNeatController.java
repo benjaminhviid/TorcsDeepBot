@@ -2,6 +2,11 @@ package itu.bj.torcs;
 
 import com.anji.integration.Activator;
 
+import static org.bj.deeplearning.tools.Utils.map;
+import static org.bj.deeplearning.tools.Utils.clamp;
+
+
+
 public class TorcsNeatController extends Controller {
 
 	
@@ -62,7 +67,7 @@ public class TorcsNeatController extends Controller {
 		// logging values
 		speed  = normalizeSpeed(sensors.getSpeed());
 		angle = normalizeAngle(sensors.getAngleToTrackAxis());
-		Double trackPos = getTrackPosition();
+		Double trackPos = sensors.getTrackPosition();
 
 		dist_RL = map(clamp(trackPos, -1, 1), -1.0, 1.0, 0.0, 1.0);
 		dist_RR = map((1 - clamp(trackPos, -1, 1)), -1.0, 1.0, 0.0, 1.0);
@@ -174,10 +179,7 @@ public class TorcsNeatController extends Controller {
 		return clamp((speed+200)/400.0, 0.0, 1.0);
 	}
 
-    private double normalizeDamage(double dmg) {
-        
-        return clamp(dmg/10000.0, 0.0, 1.0);
-    }
+    private double normalizeDamage(double dmg) { return clamp(dmg/10000.0, 0.0, 1.0); }
 
     private double normalizeAngle(double angle) {
 		return (angle+Math.PI)/(2*Math.PI);
@@ -185,15 +187,6 @@ public class TorcsNeatController extends Controller {
 	
 	private double normalizeSteering(double steer) {
 		return clamp(steer*2.0-1.0,-1,1);
-	}
-
-	double map(double s, double a1, double a2, double b1, double b2)
-	{
-		return b1 + (s-a1)*(b2-b1)/(a2-a1);
-	}
-
-	double clamp (double value, double min, double max){
-		return Math.max(min, Math.min(max, value));
 	}
 
 }
