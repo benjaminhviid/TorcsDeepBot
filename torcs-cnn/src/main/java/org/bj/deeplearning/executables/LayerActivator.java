@@ -39,7 +39,7 @@ public class LayerActivator {
 	
 	public static void getActivationOfLayers(File networkFile, int imageId) throws FileNotFoundException, IOException {
 		MultiLayerNetwork network = ModelSerializer.restoreMultiLayerNetwork(new FileInputStream(networkFile));
-		TrainingData image = TrainingDataHandler.instance().getTrainingData(imageId, imageId).get(0);
+		TrainingData image = TrainingDataHandler.getTrainingData(imageId, imageId).get(0);
 		ImageTool.printColoredPngImage(image.getPixelData(), image.getWidth(), new File("image"+ imageId +".png"));
 		
 		network.output(Nd4j.create(ImageTool.toScaledDoubles(image.getPixelData()), new int[] { 1, 3, image.getWidth(), image.getHeight()}), false);

@@ -45,7 +45,7 @@ public class FileSystem {
 
 	private static void persistImagesToDisk(int batchSize, int maxNumberOfImagesToPersist) {
 		int maxSavedId = FileSystem.findLatestTrainingDataId();
-		int maxId = TrainingDataHandler.instance().getTotalNumberOfImages();
+		int maxId = TrainingDataHandler.getTotalNumberOfImages();
 
 		if(maxNumberOfImagesToPersist < maxSavedId) {
 			maxNumberOfImagesToPersist = maxSavedId;
@@ -63,14 +63,14 @@ public class FileSystem {
 			if((i - maxSavedId - 1)%(10*batchSize) == 0 && i != maxSavedId + 1) {
 				System.out.format("Downloaded %d items \n", i - maxSavedId - 1);
 			}
-			List<TrainingData> images = TrainingDataHandler.instance().getTrainingData(i, i + batchSize - 1);
+			List<TrainingData> images = TrainingDataHandler.getTrainingData(i, i + batchSize - 1);
 			FileSystem.persist(images);
 		}
 	}
 
 	private static void persistMissingImages(int maxNumberOfImagesToPersist) {
 		int maxSavedId = FileSystem.findLatestTrainingDataId();
-		int maxId = TrainingDataHandler.instance().getTotalNumberOfImages();
+		int maxId = TrainingDataHandler.getTotalNumberOfImages();
 
 		if(maxNumberOfImagesToPersist < maxSavedId) {
 			maxNumberOfImagesToPersist = maxSavedId;
@@ -160,7 +160,7 @@ public class FileSystem {
 			int height = (int) Double.parseDouble(lines[index++]);
 			int width = (int) Double.parseDouble(lines[index++]);
 			int _id =  (int) Double.parseDouble(lines[index++]);
-			byte[] pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.instance().SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
+			byte[] pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
 
 			return new TrainingData(angle, speed, dist_RL, dist_RR, height, width, _id, pixelData);
 

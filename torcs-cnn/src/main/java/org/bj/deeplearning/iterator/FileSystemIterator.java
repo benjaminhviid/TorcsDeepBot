@@ -23,7 +23,7 @@ public class FileSystemIterator extends BaseIterator {
 
 	@Override
 	public int totalExamples() {
-		return TrainingDataHandler.instance().getTotalNumberOfImages();
+		return TrainingDataHandler.getTotalNumberOfImages();
 	}
 
 	/**

@@ -28,7 +28,7 @@ public class CSVIterator extends BaseIterator {
     @Override
     public DataSet next(int num) {
         cursor++;
-        return toDataSet(TrainingDataHandler.instance().getRandomTrainingData(num));
+        return toDataSet(TrainingDataHandler.getRandomTrainingData(num));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class CSVIterator extends BaseIterator {
     @Override
     public int inputColumns() {
         if(inputColumns == -1) {
-            inputColumns = TrainingDataHandler.instance().getWidthHeightProduct();
+            inputColumns = TrainingDataHandler.getWidthHeightProduct();
         }
         return inputColumns;
     }
@@ -61,7 +61,7 @@ public class CSVIterator extends BaseIterator {
     @Override
     public List<String> getLabels() {
         if(labels == null) {
-            labels = TrainingDataHandler.instance().getGroundTruthLabels();
+            labels = TrainingDataHandler.getGroundTruthLabels();
         }
         return labels;
     }

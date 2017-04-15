@@ -16,23 +16,56 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ContinuousTraining.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/ContinuousTraining.java">
+      <file leaf-file-name="FileSystem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/FileSystem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="1215">
+              <caret line="98" column="66" lean-forward="false" selection-start-line="98" selection-start-column="66" selection-end-line="98" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TrainingDataHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingDataHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="143">
+              <caret line="155" column="6" lean-forward="true" selection-start-line="155" selection-start-column="6" selection-end-line="155" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1772#1786#0" expanded="true" />
+                <element signature="e#2038#2052#0" expanded="true" />
+                <element signature="e#4501#4509#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileSystem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/FileSystem.java">
+      <file leaf-file-name="AccuracyFinder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/AccuracyFinder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2070">
-              <caret line="158" column="36" lean-forward="false" selection-start-line="158" selection-start-column="36" selection-end-line="158" selection-end-column="36" />
+            <state relative-caret-position="810">
+              <caret line="70" column="16" lean-forward="false" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CSVIterator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/iterator/CSVIterator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="55" column="28" lean-forward="false" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DeadNeuronDetector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/DeadNeuronDetector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="49" column="39" lean-forward="false" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -41,85 +74,52 @@
       <file leaf-file-name="LayerActivator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/LayerActivator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-525">
-              <caret line="36" column="9" lean-forward="false" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
+            <state relative-caret-position="315">
+              <caret line="41" column="49" lean-forward="false" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BuilderFactory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/BuilderFactory.java">
+      <file leaf-file-name="Sampler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Sampler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1140">
-              <caret line="393" column="24" lean-forward="false" selection-start-line="393" selection-start-column="23" selection-end-line="393" selection-end-column="24" />
+            <state relative-caret-position="210">
+              <caret line="21" column="62" lean-forward="false" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PersistImages.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/PersistImages.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-202">
+              <caret line="27" column="65" lean-forward="false" selection-start-line="27" selection-start-column="65" selection-end-line="27" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileSystemIterator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/iterator/FileSystemIterator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="25" column="42" lean-forward="false" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#642#643#0" expanded="true" />
+                <element signature="e#700#701#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Evaluator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Evaluator.java">
+      <file leaf-file-name="ImageTool.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/tools/ImageTool.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="24" column="41" lean-forward="false" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+              <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Trainer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Trainer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="93" column="24" lean-forward="true" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TrainingDataHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingDataHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1772#1786#0" expanded="true" />
-                <element signature="e#2038#2052#0" expanded="true" />
-                <element signature="e#4350#4351#0" expanded="true" />
-                <element signature="e#4397#4398#0" expanded="true" />
-                <element signature="e#4501#4509#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContinuousSequentialTraining.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/ContinuousSequentialTraining.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TrainingData.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="71" column="79" lean-forward="false" selection-start-line="71" selection-start-column="79" selection-end-line="71" selection-end-column="79" />
-              <folding>
-                <element signature="e#3400#3401#0" expanded="true" />
-                <element signature="e#3441#3442#0" expanded="true" />
-                <element signature="e#3496#3497#0" expanded="true" />
-                <element signature="e#3545#3546#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -128,6 +128,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>id</find>
       <find>inst</find>
     </findStrings>
   </component>
@@ -152,10 +153,17 @@
         <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/ContinuousSequentialTraining.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/ContinuousTraining.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Evaluator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/FileSystem.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingDataHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Trainer.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingData.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/iterator/CSVIterator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/DeadNeuronDetector.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Sampler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/PersistImages.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/iterator/FileSystemIterator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/LayerActivator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/FileSystem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/tools/ImageTool.java" />
       </list>
     </option>
   </component>
@@ -651,13 +659,13 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33857316" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33857316" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28350514" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -683,140 +691,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/lang/ClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6345">
-          <caret line="423" column="0" lean-forward="false" selection-start-line="423" selection-start-column="0" selection-end-line="423" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#84225#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#10144#10145#0" expanded="false" />
-            <element signature="e#10181#10182#0" expanded="false" />
-            <element signature="e#11991#11992#0" expanded="false" />
-            <element signature="e#12045#12046#0" expanded="false" />
-            <element signature="e#12720#12721#0" expanded="false" />
-            <element signature="e#12790#12791#0" expanded="false" />
-            <element signature="e#18896#19112#0" expanded="false" />
-            <element signature="e#19111#19112#0" expanded="false" />
-            <element signature="e#37807#37808#0" expanded="false" />
-            <element signature="e#37839#37840#0" expanded="false" />
-            <element signature="e#40716#40717#0" expanded="false" />
-            <element signature="e#40753#40754#0" expanded="false" />
-            <element signature="e#44527#44528#0" expanded="false" />
-            <element signature="e#44554#44555#0" expanded="false" />
-            <element signature="e#48436#48437#0" expanded="false" />
-            <element signature="e#48499#48500#0" expanded="false" />
-            <element signature="e#48546#48547#0" expanded="false" />
-            <element signature="e#48604#48605#0" expanded="false" />
-            <element signature="e#48747#48748#0" expanded="false" />
-            <element signature="e#48811#48812#0" expanded="false" />
-            <element signature="e#63283#63284#0" expanded="false" />
-            <element signature="e#63310#63311#0" expanded="false" />
-            <element signature="e#66057#66058#0" expanded="false" />
-            <element signature="e#66137#66138#0" expanded="false" />
-            <element signature="e#70464#70629#0" expanded="false" />
-            <element signature="e#70628#70629#0" expanded="false" />
-            <element signature="e#83683#83684#0" expanded="false" />
-            <element signature="e#83719#83720#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/lang/Class.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3945">
-          <caret line="263" column="0" lean-forward="false" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#147821#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#16480#16724#0" expanded="false" />
-            <element signature="e#16723#16724#0" expanded="false" />
-            <element signature="e#23047#23048#0" expanded="false" />
-            <element signature="e#23104#23105#0" expanded="false" />
-            <element signature="e#23453#23454#0" expanded="false" />
-            <element signature="e#23509#23510#0" expanded="false" />
-            <element signature="e#32636#32637#0" expanded="false" />
-            <element signature="e#32683#32684#0" expanded="false" />
-            <element signature="e#45841#45842#0" expanded="false" />
-            <element signature="e#45932#45933#0" expanded="false" />
-            <element signature="e#56746#56747#0" expanded="false" />
-            <element signature="e#56789#56790#0" expanded="false" />
-            <element signature="e#58208#58209#0" expanded="false" />
-            <element signature="e#58257#58258#0" expanded="false" />
-            <element signature="e#58496#58497#0" expanded="false" />
-            <element signature="e#58567#58568#0" expanded="false" />
-            <element signature="e#58809#58810#0" expanded="false" />
-            <element signature="e#58891#58892#0" expanded="false" />
-            <element signature="e#61733#62511#0" expanded="false" />
-            <element signature="e#62510#62511#0" expanded="false" />
-            <element signature="e#104463#104464#0" expanded="false" />
-            <element signature="e#104523#104524#0" expanded="false" />
-            <element signature="e#112572#112573#0" expanded="false" />
-            <element signature="e#112604#112605#0" expanded="false" />
-            <element signature="e#112898#112899#0" expanded="false" />
-            <element signature="e#112942#112943#0" expanded="false" />
-            <element signature="e#114513#114514#0" expanded="false" />
-            <element signature="e#114550#114551#0" expanded="false" />
-            <element signature="e#114579#114580#0" expanded="false" />
-            <element signature="e#114620#114621#0" expanded="false" />
-            <element signature="e#117160#117161#0" expanded="false" />
-            <element signature="e#117198#117199#0" expanded="false" />
-            <element signature="e#132121#133355#0" expanded="false" />
-            <element signature="e#133354#133355#0" expanded="false" />
-            <element signature="e#134416#134665#0" expanded="false" />
-            <element signature="e#134664#134665#0" expanded="false" />
-            <element signature="e#136811#136812#0" expanded="false" />
-            <element signature="e#136896#136897#0" expanded="false" />
-            <element signature="e#139547#139548#0" expanded="false" />
-            <element signature="e#139624#139625#0" expanded="false" />
-            <element signature="e#144390#144391#0" expanded="false" />
-            <element signature="e#144427#144428#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Trainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="24" column="18" lean-forward="false" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/ContinuousSequentialTraining.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/deeplearning4j/deeplearning4j-nn/0.7.0/deeplearning4j-nn-0.7.0.jar!/org/deeplearning4j/nn/conf/layers/DenseLayer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/deeplearning4j/deeplearning4j-nn/0.7.0/deeplearning4j-nn-0.7.0.jar!/org/deeplearning4j/nn/multilayer/MultiLayerNetwork.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/deeplearning4j/deeplearning4j-nn/0.7.0/deeplearning4j-nn-0.7.0.jar!/org/deeplearning4j/nn/params/DefaultParamInitializer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/BuilderFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2670">
@@ -1440,14 +1314,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/FileSystem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="158" column="36" lean-forward="false" selection-start-line="158" selection-start-column="36" selection-end-line="158" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/ContinuousTraining.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
@@ -1458,32 +1324,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/LayerActivator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-525">
-          <caret line="36" column="9" lean-forward="false" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingDataHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1772#1786#0" expanded="true" />
-            <element signature="e#2038#2052#0" expanded="true" />
-            <element signature="e#4350#4351#0" expanded="true" />
-            <element signature="e#4397#4398#0" expanded="true" />
-            <element signature="e#4501#4509#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Trainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
+        <state relative-caret-position="1200">
           <caret line="93" column="24" lean-forward="true" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1493,14 +1336,101 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="71" column="79" lean-forward="false" selection-start-line="71" selection-start-column="79" selection-end-line="71" selection-end-column="79" />
+        <state relative-caret-position="300">
+          <caret line="48" column="40" lean-forward="false" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
           <folding>
-            <element signature="e#3400#3401#0" expanded="true" />
-            <element signature="e#3441#3442#0" expanded="true" />
-            <element signature="e#3496#3497#0" expanded="true" />
-            <element signature="e#3545#3546#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3422#3423#0" expanded="true" />
+            <element signature="e#3463#3464#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Sampler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="21" column="62" lean-forward="false" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/PersistImages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-202">
+          <caret line="27" column="65" lean-forward="false" selection-start-line="27" selection-start-column="65" selection-end-line="27" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/iterator/FileSystemIterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="25" column="42" lean-forward="false" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
+          <folding>
+            <element signature="e#642#643#0" expanded="true" />
+            <element signature="e#700#701#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/LayerActivator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="41" column="49" lean-forward="false" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/DeadNeuronDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="49" column="39" lean-forward="false" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/iterator/CSVIterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="55" column="28" lean-forward="false" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/AccuracyFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="70" column="16" lean-forward="false" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingDataHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="155" column="6" lean-forward="true" selection-start-line="155" selection-start-column="6" selection-end-line="155" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1772#1786#0" expanded="true" />
+            <element signature="e#2038#2052#0" expanded="true" />
+            <element signature="e#4501#4509#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/FileSystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1215">
+          <caret line="98" column="66" lean-forward="false" selection-start-line="98" selection-start-column="66" selection-end-line="98" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/bj/deeplearning/tools/ImageTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>

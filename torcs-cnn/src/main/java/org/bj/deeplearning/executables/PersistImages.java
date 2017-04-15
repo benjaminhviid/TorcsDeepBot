@@ -25,7 +25,7 @@ public class PersistImages {
 		FileSystem.createFolders();
 		for(int id = fromId; id <= toId; id += batchDownloadSize) {
 			int endId = Math.min(toId, id + batchDownloadSize - 1);
-			List<TrainingData> trainingData = TrainingDataHandler.instance().getTrainingData(id, endId);
+			List<TrainingData> trainingData = TrainingDataHandler.getTrainingData(id, endId);
 			FileSystem.persist(trainingData);
 		}
 

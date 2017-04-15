@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageInputStream;
 
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 
@@ -185,12 +186,10 @@ public class ImageTool extends RandomAccessFile {
 
 
         // Load the image. This expects the image to be in the same package with this class
-        InputStream stream;
         BufferedImage image;
         try {
 
             image = ImageIO.read(new FileImageInputStream(new File(path)));
-
             int iw = image.getWidth();
             int ih = image.getHeight();
 

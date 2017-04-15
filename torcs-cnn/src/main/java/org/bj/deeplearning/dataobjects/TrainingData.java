@@ -2,6 +2,8 @@ package org.bj.deeplearning.dataobjects;
 
 import org.bj.deeplearning.tools.ImageTool;
 
+import java.io.File;
+
 public class TrainingData {
 
 	private int height, width, id;

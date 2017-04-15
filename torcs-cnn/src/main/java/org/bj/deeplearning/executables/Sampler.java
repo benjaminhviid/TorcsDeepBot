@@ -19,7 +19,7 @@ public class Sampler {
 	}
 
 	public static void persistRepresentativeSampleOfDatabase(int sampleSize) throws IOException {
-		List<TrainingData> randomImages = TrainingDataHandler.instance().getRandomTrainingData(sampleSize);
+		List<TrainingData> randomImages = TrainingDataHandler.getRandomTrainingData(sampleSize);
 		
 		for(TrainingData td : randomImages) {
 			ImageTool.printColoredPngImage(td.getPixelData(), td.getWidth(), new File(FileSystem.getSamplesFolder().resolve("image" + td.getId() + ".png").toString()));

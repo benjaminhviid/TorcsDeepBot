@@ -47,7 +47,7 @@ public class DeadNeuronDetector {
 		
 		List<TrainingData> sample;
 		if("database".equals(PropertiesReader.getProjectProperties().get("training.persistence.type"))) {
-			sample = TrainingDataHandler.instance().getRandomTrainingData(sampleSize);
+			sample = TrainingDataHandler.getRandomTrainingData(sampleSize);
 		} else {
 			sample = FileSystem.getRandomImages(sampleSize);
 		}
