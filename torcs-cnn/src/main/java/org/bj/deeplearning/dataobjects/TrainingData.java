@@ -19,12 +19,12 @@ public class TrainingData {
 
 
     public static int getFeatureCount() {
-		return TrainingDataHandler.instance().getNumberOfGroundTruths();
+		return TrainingDataHandler.getNumberOfGroundTruths();
 	}
 
 	public TrainingData(int id){
 
-        String[] sample = TrainingDataHandler.instance().getSample(id+1); // plus one to avoid header
+        String[] sample = TrainingDataHandler.getSample(id+1); // plus one to avoid header
 
 		angle = Double.parseDouble(sample[angle_index]);
 		angle = clamp(angle, -1.0, 1.0);
@@ -44,7 +44,7 @@ public class TrainingData {
         height = (int)Double.parseDouble(sample[height_index]);
         width = (int)Double.parseDouble(sample[width_index]);
         id = (int)Double.parseDouble(sample[id_index]);
-		pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.instance().SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
+		pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
 
         features = calculateFeatures();
 
@@ -69,7 +69,7 @@ public class TrainingData {
        	this.height = height;
        	this.width = width;
         this.id = id;
-		this.pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.instance().SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
+		this.pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
 
 		features = calculateFeatures();
 
