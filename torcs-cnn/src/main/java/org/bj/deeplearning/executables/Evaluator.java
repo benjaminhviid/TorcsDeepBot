@@ -39,7 +39,6 @@ public class Evaluator {
 		Files.createDirectories(Paths.get("misses"));
 		int firstId = Trainer.lastValidationIndex()+1;
 		int lastId = Trainer.lastTestIndex();
-
 		if(lastId-firstId < 0) {
 			throw new IllegalArgumentException("Test set is empty");
 		}
