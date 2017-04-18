@@ -1,5 +1,10 @@
 package itu.bj.torcs;
 
+import org.bj.deeplearning.dataobjects.TrainingData;
+import org.bj.deeplearning.executables.Evaluator;
+
+import java.io.IOException;
+
 public class RunTorcs {
 
 
@@ -14,8 +19,20 @@ public class RunTorcs {
 				"trackName:aalborg",
 				"stage:2"
 		};
-		Client.setDriver(new DrunkKitt());
-        Client.main(arguments);
+		//Client.setDriver(new DrunkKitt());
+        //Client.main(arguments);
+
+
+		for (int i = 0; i < 100; i++){
+			TrainingData td = new TrainingData(i);
+			try {
+				double[] output = Evaluator.sendOutput(td.getPixelData());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+
 	}
 
 

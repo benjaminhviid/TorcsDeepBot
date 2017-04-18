@@ -1,5 +1,7 @@
 package itu.bj.torcs;
 
+import org.apache.commons.io.FilenameUtils;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -14,10 +16,10 @@ public class DataCollector {
 	private static final DataCollector _instance = new DataCollector();
 
 	private DataCollector(){
-		if (getLatestID == -1)
+		if (getLatestID(path + newFolder) == -1)
 			screenCount = 1;
 		else 
-			screenCount = getLatestID;
+			screenCount = getLatestID(path + newFolder);
 	 }
 
 	public static DataCollector instance(){
@@ -42,7 +44,7 @@ public class DataCollector {
 	private static int height = 600;
 	private static boolean pause = false;
 	private static boolean useMainDir = false;
-
+	private static Integer screenCount;
 	public static void main(String[] args) {
 
 	}
@@ -75,7 +77,7 @@ public class DataCollector {
 
 			if (filenameExist){
 				try {
-					fw = new FileWriter(newDir + "/trainingdata.csv"), true);
+					fw = new FileWriter(newDir + "/trainingdata.csv", true);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -178,7 +180,7 @@ public class DataCollector {
 
 	public static int getLatestID(String fileDir) {
 
- 		File dir = new File(dirPath);
+ 		File dir = new File(fileDir);
 	    File[] files = dir.listFiles();
 	    if (files == null || files.length == 0) {
 	        return -1;

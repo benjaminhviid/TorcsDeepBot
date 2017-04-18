@@ -72,7 +72,7 @@ public abstract class ContinuousTraining implements Trainable {
 
 	protected void initConfig() {
 		//configuration = BuilderFactory.getConvNet(height, width, featureCount).build();
-		configuration = BuilderFactory.getShallowConvNet(height, width, featureCount).build();
+		configuration = BuilderFactory.getReducingConvNet(height, width, featureCount).build();
 
 	}
 

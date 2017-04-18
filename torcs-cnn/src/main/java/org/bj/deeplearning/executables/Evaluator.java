@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import com.sun.org.apache.xpath.internal.operations.Mult;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
 import org.bj.deeplearning.dataobjects.FileSystem;
@@ -19,10 +20,10 @@ import org.nd4j.linalg.factory.Nd4j;
 public class Evaluator {
 
 	private static final int BATCH_SIZE = 32;
-
+	private static MultiLayerNetwork net;
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		Trainer.init();
-		FileSystem.createModelsFolders();
+		//FileSystem.createModelsFolders();
 		Path modelPath;
 		if(args.length != 1) {
 			modelPath = FileSystem.getPathOfLatestModelFile();
@@ -30,10 +31,13 @@ public class Evaluator {
 			modelPath = FileSystem.getPathOfModelFile(Integer.parseInt(args[0]));
 		}
 		MultiLayerNetwork network = ModelSerializer.restoreMultiLayerNetwork(new FileInputStream(modelPath.toFile()));
-		System.out.println(network.getLayerWiseConfigurations().toString());
-		System.out.format("Evaluating model %s \n", modelPath.toString());
+		//System.out.println(network.getLayerWiseConfigurations().toString());
+		//System.out.format("Evaluating model %s \n", modelPath.toString());
 		double accuracy = getAccuracy(network);
 	}
+
+
+
 
 	public static double getAccuracy(MultiLayerNetwork network) throws IOException {
 		Files.createDirectories(Paths.get("misses"));
@@ -56,7 +60,7 @@ public class Evaluator {
                 INDArray in = Nd4j.create(ImageTool.toScaledDoubles(td.getPixelData()), new int[] {1, 3, td.getWidth(), td.getHeight()});
 
                 INDArray output = network.output(in, false);
-                System.out.println(output);
+                //System.out.println(output);
 /*
                 double[] binaryVector = NNTool.toBinaryVector(INDArrayTool.toFlatDoubleArray(output));
 				if(ArrayUtils.isEquals(binaryVector, groundTruths)) {
@@ -73,6 +77,29 @@ public class Evaluator {
 		}
 
 		return ((double) hits) / ((double) lastId-firstId+1);
+	}
+
+	public static double[] sendOutput(byte[] pixels) throws IOException {
+
+		if (net == null){
+			setNetwork();
+		}
+
+		INDArray in = Nd4j.create(ImageTool.toScaledDoubles(pixels), new int[] {1, 3, 280, 210});
+		INDArray out = net.output(in, false);
+		double[] output = new double[out.length()];
+
+		for(int i = 0; i < out.length(); i++) {
+			output[i] = out.getDouble(i);
+			System.out.print(output[i] + " ");
+		}
+		System.out.println("");
+		return output;
+	}
+
+	private static void setNetwork() throws IOException{
+		Path modelPath = FileSystem.getPathOfLatestModelFile();
+		net = ModelSerializer.restoreMultiLayerNetwork(new FileInputStream(modelPath.toFile()));
 	}
 
 	private static int getIndex(double[] arr) {
