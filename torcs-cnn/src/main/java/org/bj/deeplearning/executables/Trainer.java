@@ -19,6 +19,8 @@ import org.nd4j.linalg.api.buffer.DataBuffer;
 import org.nd4j.linalg.api.buffer.util.DataTypeUtil;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 
+import static org.bj.deeplearning.tools.Utils.map;
+
 public class Trainer {
 
 	private static int testSize, validationSize, trainSize, batchSize;

@@ -60,7 +60,7 @@ public class TorcsNeatController extends Controller {
 		updateDiff(distance);
 		storeDistance(distance);
 		Action result = getOutput(activator.next(getInput(sensors)));
-		
+
 		result.clutch = 0;
 		result.gear = automaticGear(sensors);
 

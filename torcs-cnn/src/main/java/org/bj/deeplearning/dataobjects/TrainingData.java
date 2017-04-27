@@ -1,108 +1,127 @@
 package org.bj.deeplearning.dataobjects;
 
 import org.bj.deeplearning.tools.ImageTool;
+import org.bj.deeplearning.tools.Utils;
+
 import static org.bj.deeplearning.tools.Utils.clamp;
 import static org.bj.deeplearning.tools.Utils.map;
 
+enum TrainingDataType {MINIMAL, SHALLOW, EXTENSIVE;}
 
 public class TrainingData {
 
 	private int height, width, id;
 	private byte[] pixelData;
 	private double[] features;
-	private double angle, speed, dist_RL, dist_RR;
+	private double angle, speed, marking_L, marking_M, marking_R, dist_L, dist_R;
+	TrainingDataType type;
 
-	private int angle_index         = 0;
-	private int speed_index         = 1;
-	private int dist_RL_index       = 2;
-    private int dist_RR_index       = 3;
-    private int height_index        = 4;
-    private int width_index         = 5;
-    private int id_index            = 6;
+	// CONFIG 1: angle, speed, markingM, markingR
+	// CONFIG 2: angle, speed, markingL, markingM, markingR, distL, distR
+
+private int index = 0;
 
 
     public static int getFeatureCount() {
 		return TrainingDataHandler.getNumberOfGroundTruths();
 	}
 
-	public TrainingData(int id){
+	public TrainingData(int id, TrainingDataType type){
 
-        String[] sample = TrainingDataHandler.getSample(id+1); // plus one to avoid header
+        String[] sample = TrainingDataHandler.getSample(id); // plus one to avoid header
+		this.type = type;
+		angle = Double.parseDouble(sample[index++]);
+		angle = clamp(angle, -Math.PI, Math.PI);
+		angle = map(speed, -Math.PI, Math.PI, 0.1, 0.9);
 
-		angle = Double.parseDouble(sample[angle_index]);
-		angle = clamp(angle, -1.0, 1.0);
+        speed = Double.parseDouble(sample[index++]);
+        speed = clamp(speed, 0, 200);
+        speed = map(speed, 0, 200, 0.1, 0.9);
 
-        speed = Double.parseDouble(sample[speed_index]);
-        speed = clamp(speed, 0, 80);
-        speed = map(speed, 0, 80, 0, 1);
 
-        dist_RL = Double.parseDouble(sample[dist_RL_index]);
-		dist_RL = clamp(dist_RL, 0, 1.5);
-		dist_RL = map(dist_RL, 0, 1.5, 0, 1);
+		if (type == TrainingDataType.MINIMAL || type == TrainingDataType.EXTENSIVE){
+			double trackPos = Double.parseDouble(sample[index++]);
 
-		dist_RR = Double.parseDouble(sample[dist_RR_index]);
-		dist_RR = clamp(dist_RR, 0, 1.5);
-		dist_RR = map(dist_RR, 0, 1.5, 0, 1);
+			if (type == TrainingDataType.EXTENSIVE) {
+				marking_L = 0.9 - map(clamp(trackPos, -1, 1), -1.0, 1.0, 0.1, 0.9);
+			}
 
-        height = (int)Double.parseDouble(sample[height_index]);
-        width = (int)Double.parseDouble(sample[width_index]);
-        id = (int)Double.parseDouble(sample[id_index]);
+			marking_M = map(clamp(trackPos, -1, 1), -1.0, 1.0, 0.1, 0.9);
+			marking_R = 0.9 - map(Utils.clamp(trackPos, -1, 1), -1.0, 1.0, 0.1, 0.9);
+		    marking_R = map(marking_R, 0.1, 0.9, 0.9, 0.1);
+		}
+
+		if (type == TrainingDataType.SHALLOW) {
+			marking_M = Double.parseDouble(sample[index++]);
+			marking_M = clamp(marking_M, 0, 1.5);
+			marking_M = map(marking_M, 0, 1.5, 0, 1);
+
+			marking_R = Double.parseDouble(sample[index++]);
+			marking_R = clamp(marking_R, 0, 1.5);
+			marking_R = map(marking_R, 0, 1.5, 0, 1);
+		}
+
+		if (type == TrainingDataType.EXTENSIVE) {
+			dist_L = Double.parseDouble(sample[index++]);
+			dist_R = Double.parseDouble(sample[index++]);
+
+		}
+
+		if (type == TrainingDataType.SHALLOW) {
+			height = (int) Double.parseDouble(sample[index++]);
+			width = (int) Double.parseDouble(sample[index++]);
+			id = (int) Double.parseDouble(sample[index++]);
+		}
+		else {
+        	height = 210; // TODO: get from properties file instead
+        	width = 280;
+        	this.id = id;
+
+		}
 		pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
 
         features = calculateFeatures();
-
     }
 
-
-	public TrainingData(double angle, double speed, double dist_RL, double dist_RR, int height, int width, int id){
-
-		this.angle = angle;
-		this.angle = clamp(angle, -1.0, 1.0);
-
-		this.speed = speed;
-		this.speed = clamp(speed, 0, 80);
-		this.speed = map(speed, 0, 80, 0, 1);
-
-		this.dist_RL = dist_RL;
-		this.dist_RL = clamp(dist_RL, 0, 1.5);
-		this.dist_RL = map(dist_RL, 0, 1.5, 0, 1);
-		this.dist_RR = dist_RR;
-		this.dist_RR = clamp(dist_RR, 0, 1.5);
-		this.dist_RR = map(dist_RR, 0, 1.5, 0, 1);
-       	this.height = height;
-       	this.width = width;
-        this.id = id;
-		this.pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
-
-		features = calculateFeatures();
-
-	}
-
-	public TrainingData(double angle, double speed, double dist_RL, double dist_RR, int height, int width, int id, byte[] pixelData) {
+	// used in FileSystem
+	@Deprecated
+	public TrainingData(double angle, double speed, double marking_M, double marking_R, int height, int width, int id, byte[] pixelData) {
 
 		this.angle = angle;
 		this.speed = speed;
-		this.dist_RL = dist_RL;
-		this.dist_RR = dist_RR;
+		this.marking_M = marking_M;
+		this.marking_R = marking_R;
 		this.height = height;
 		this.width = width;
 		this.id = id;
 		this.pixelData = pixelData;
-
 		features = calculateFeatures();
-
 	}
 
-		private double[] calculateFeatures() {
+	private double[] calculateFeatures() {
 
-		double[] result = new double[4];
+		if (type == TrainingDataType.SHALLOW || type == TrainingDataType.MINIMAL) {
 
-		result[0] = angle;
-		result[1] = speed;
-		result[2] = dist_RL;
-		result[3] = dist_RR;
+			double[] result = new double[4];
+			result[0] = angle;
+			result[1] = speed;
+			result[2] = marking_M;
+			result[3] = marking_R;
+			return result;
+		}
+		else {
+			double[] result = new double[7];
+			result[0] = angle;
+			result[1] = speed;
+			result[2] = marking_L;
+			result[3] = marking_M;
+			result[4] = marking_R;
+			result[5] = dist_L;
+			result[6] = dist_R;
+			return result;
 
-		return result;
+		}
+
 	}
 
 	public double[] getFeatures() {
@@ -133,12 +152,27 @@ public class TrainingData {
 		return speed;
 	}
 
-	public double getDist_RL() {
-		return dist_RL;
+	public double getMarking_L() {
+		return marking_L;
 	}
 
-	public double getDist_RR() {
-		return dist_RR;
+	public double getMarking_M() {
+		return marking_M;
 	}
+
+	public double getMarking_R() {
+		return marking_R;
+	}
+
+	public double getDist_L() {
+		return dist_L;
+	}
+
+	public double getDist_R() {
+		return dist_R;
+	}
+
+
+	public TrainingDataType getType(){ return type; }
 
 }

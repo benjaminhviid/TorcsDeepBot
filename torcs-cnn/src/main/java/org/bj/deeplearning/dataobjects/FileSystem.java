@@ -109,8 +109,22 @@ public class FileSystem {
 
 		double angle = td.getAngle();
 		double speed = td.getSpeed();
-		double dist_RL = td.getDist_RL();
-		double dist_RR =  td.getDist_RR();
+
+		double marking_L;
+		if (td.getType() == TrainingDataType.EXTENSIVE)
+			 marking_L = td.getMarking_L();
+		double marking_M = td.getMarking_M();
+		double marking_R =  td.getMarking_R();
+
+		double dist_L;
+		double dist_R;
+
+		if (td.getType() == TrainingDataType.EXTENSIVE){
+			dist_L = td.getMarking_L();
+			dist_R = td.getMarking_R();
+
+		}
+
 		int height = td.getHeight();
 		int width = td.getWidth();
 		int id = td.getId();
@@ -119,8 +133,8 @@ public class FileSystem {
 		StringBuilder sb = new StringBuilder();
 		sb.append(angle).append(System.lineSeparator());
 		sb.append(speed).append(System.lineSeparator());
-		sb.append(dist_RL).append(System.lineSeparator());
-		sb.append(dist_RR).append(System.lineSeparator());
+		sb.append(marking_M).append(System.lineSeparator());
+		sb.append(marking_R).append(System.lineSeparator());
 		sb.append(width).append(System.lineSeparator());
 		sb.append(height).append(System.lineSeparator());
 

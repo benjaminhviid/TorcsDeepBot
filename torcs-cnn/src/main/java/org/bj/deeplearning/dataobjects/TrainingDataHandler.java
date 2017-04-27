@@ -1,5 +1,7 @@
 package org.bj.deeplearning.dataobjects;
 
+import org.bj.deeplearning.tools.PropertiesReader;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -24,7 +27,13 @@ public class TrainingDataHandler {
 
     public static final String SCREENSHOTS_PATH = TrainingDataHandler.class.getClassLoader().getResource("torcsdata/screenshots/").getPath();
 
+    static TrainingDataType type = TrainingDataType.MINIMAL;
     public static int iterator = 0;
+    static Properties projectProperties = PropertiesReader.getProjectProperties();
+    public static int width = Integer.parseInt(projectProperties.getProperty("training.image.width"));
+    public static int height = Integer.parseInt(projectProperties.getProperty("training.image.height"));
+
+
 
     public static void main(String[] args) throws IOException {
         List<String> headers = getGroundTruthLabels();
@@ -35,29 +44,21 @@ public class TrainingDataHandler {
 
     }
 
-    private static int angle_index         = 0;
-    private static int speed_index         = 1;
-    private static int dist_RL_index       = 2;
-    private static int dist_RR_index       = 3;
-    private static int height_index        = 4;
-    private static int width_index         = 5;
-    private static int id_index            = 6;
-    private static int pixeldata_index     = 7;
 
-    private static int numberOfNonGroundTruthsInTrainingDataSet = 3; // height, width, id;
+    private static int numberOfNonGroundTruthsInTrainingDataSet= 0; // height, width, id;
 
 
     public static List<TrainingData> getTrainingData(int fromId, int toId) {
 
         List<TrainingData> result = new ArrayList<TrainingData>();
-        getIndicesToIntList(fromId, toId).forEach(i->result.add(new TrainingData(i)));
+        getIndicesToIntList(fromId, toId).forEach(i->result.add(new TrainingData(i, type)));
         return result;
     }
 
     public static List<TrainingData> getRandomTrainingData(int numberOfSamples){
 
         List<TrainingData> result = new ArrayList<TrainingData>();
-        getRandomIndicesIntToList(numberOfSamples).forEach(i->result.add(new TrainingData(i)));
+        getRandomIndicesIntToList(numberOfSamples).forEach(i->result.add(new TrainingData(i, type)));
         return result;
     }
 
@@ -88,7 +89,7 @@ public class TrainingDataHandler {
         }
     }
 
-    public static int getNumberOfGroundTruths(){
+    /*public static int getNumberOfGroundTruths(){
 
         try (Stream<String> lines = Files.lines(Paths.get(TRAINING_DATA_PATH))) {
             String[] line = lines.skip(1).findFirst().get().split(";"); // skip header
@@ -99,61 +100,71 @@ public class TrainingDataHandler {
             return -1;
         }
 
-    }
+    }*/
 
-    public static int getWidth(){
-        try {
-            try (Stream<String> lines = Files.lines(Paths.get(TRAINING_DATA_PATH))) {
-
-                String[] line =  lines.skip(1).findFirst().get().split(";"); // skip header
-                return Integer.getInteger(line[width_index]);
-            }
+    public static int getNumberOfGroundTruths(){
+        if (type == TrainingDataType.EXTENSIVE || type == TrainingDataType.MINIMAL){
+            return 4;
         }
-        catch(Exception e){
-            System.out.println(e.getStackTrace());
-            return -1;
+        else{
+            return 7;
         }
     }
 
-    public static int getHeight(){
-        try {
-            try (Stream<String> lines = Files.lines(Paths.get(TRAINING_DATA_PATH))) {
-                String[] line =  lines.skip(1).findFirst().get().split(";"); // skip header
-                return Integer.getInteger(line[height_index]);
-            }
-        }
-        catch(Exception e){
-            System.out.println(e.getStackTrace());
-            return -1;
+
+public static int getWidth(){
+    try {
+        try (Stream<String> lines = Files.lines(Paths.get(TRAINING_DATA_PATH))) {
+
+            String[] line =  lines.skip(1).findFirst().get().split(";"); // skip header
+            return width;
         }
     }
-
-    public static int getWidthHeightProduct(){
-        return getWidth() * getHeight();
+    catch(Exception e){
+        System.out.println(e.getStackTrace());
+        return -1;
     }
+}
 
-
-    public static List<String> getGroundTruthLabels() {
-
-        List<String> result = new ArrayList<String>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(GROUND_TRUTH_LABELS_PATH));
-            String headers = reader.readLine();
-            reader.close();
-            String[] headerArray = headers.split(";");
-            for (String header : headerArray) {
-                result.add(header.trim());
-            }
-        } catch (IOException e) {
-            throw new IllegalStateException("Result was empty");
+public static int getHeight(){
+    try {
+        try (Stream<String> lines = Files.lines(Paths.get(TRAINING_DATA_PATH))) {
+            String[] line =  lines.skip(1).findFirst().get().split(";"); // skip header
+            return height;
         }
+    }
+    catch(Exception e){
+        System.out.println(e.getStackTrace());
+        return -1;
+    }
+}
 
-        return result;
+public static int getWidthHeightProduct(){
+    return getWidth() * getHeight();
+}
+
+
+public static List<String> getGroundTruthLabels() {
+
+    List<String> result = new ArrayList<String>();
+    try {
+        BufferedReader reader = new BufferedReader(new FileReader(GROUND_TRUTH_LABELS_PATH));
+        String headers = reader.readLine();
+        reader.close();
+        String[] headerArray = headers.split(";");
+        for (String header : headerArray) {
+            result.add(header.trim());
+        }
+    } catch (IOException e) {
+        throw new IllegalStateException("Result was empty");
     }
 
-    /*
-        UNTESTED
-    */
+    return result;
+}
+
+/*
+    UNTESTED
+*/
     public static String[] getSample(int id){
 
         try (Stream<String> lines = Files.lines(Paths.get(TRAINING_DATA_PATH))) {
