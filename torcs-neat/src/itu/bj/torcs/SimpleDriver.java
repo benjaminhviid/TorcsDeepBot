@@ -17,6 +17,7 @@ public class SimpleDriver extends Controller{
 	final float cos5 = (float) 0.99619;
 
 	/* Steering constants*/
+
 	final float steerLock=(float) 0.366519;
 	final float steerSensitivityOffset=(float) 80.0;
 	final float wheelSensitivityCoeff=1;

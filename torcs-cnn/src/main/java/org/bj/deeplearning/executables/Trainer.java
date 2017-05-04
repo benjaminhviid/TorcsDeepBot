@@ -1,8 +1,7 @@
 package org.bj.deeplearning.executables;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.bj.deeplearning.configuration.ContinuousParallelTraining;
+
 import org.bj.deeplearning.configuration.ContinuousSequentialTraining;
 import org.bj.deeplearning.configuration.EarlyStoppingTraining;
 import org.bj.deeplearning.configuration.Trainable;
@@ -11,15 +10,12 @@ import org.bj.deeplearning.iterator.CSVIterator;
 import org.bj.deeplearning.tools.PropertiesReader;
 //import org.nd4j.jita.conf.CudaEnvironment;
 import org.deeplearning4j.api.storage.StatsStorage;
-import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.ui.api.UIServer;
 import org.deeplearning4j.ui.stats.StatsListener;
 import org.deeplearning4j.ui.storage.InMemoryStatsStorage;
 import org.nd4j.linalg.api.buffer.DataBuffer;
 import org.nd4j.linalg.api.buffer.util.DataTypeUtil;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
-
-import static org.bj.deeplearning.tools.Utils.map;
 
 public class Trainer {
 
@@ -37,8 +33,8 @@ public class Trainer {
 	}
 
 	private static void doTrain() throws IOException {
-		DataSetIterator trainIterator = getIterator(batchSize, trainSize);
 		DataSetIterator testIterator = getIterator(batchSize, testSize);
+		DataSetIterator trainIterator = getIterator(batchSize, trainSize);
 
 		getTrainer().train(trainIterator, testIterator);
 	}
@@ -50,8 +46,6 @@ public class Trainer {
 
 	private static Trainable getTrainer() throws IOException {
 		switch (trainingType) {
-			case "parallel":
-				return new ContinuousParallelTraining();
 			case "sequential":
 				return new ContinuousSequentialTraining();
 			case "early-stopping":

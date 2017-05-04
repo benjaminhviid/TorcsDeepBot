@@ -9,6 +9,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import com.sun.org.apache.xpath.internal.operations.Mult;
+import org.apache.commons.lang.ArrayUtils;
+import org.bj.deeplearning.tools.INDArrayTool;
+import org.bj.deeplearning.tools.NNTool;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
 import org.bj.deeplearning.dataobjects.FileSystem;
@@ -21,7 +24,7 @@ public class Evaluator {
 
 	private static final int BATCH_SIZE = 32;
 	private static MultiLayerNetwork net;
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	public static void main(String[] args) throws IOException {
 		Trainer.init();
 		//FileSystem.createModelsFolders();
 		Path modelPath;
@@ -33,13 +36,17 @@ public class Evaluator {
 		MultiLayerNetwork network = ModelSerializer.restoreMultiLayerNetwork(new FileInputStream(modelPath.toFile()));
 		//System.out.println(network.getLayerWiseConfigurations().toString());
 		//System.out.format("Evaluating model %s \n", modelPath.toString());
-		double accuracy = getAccuracy(network);
+		double[] accuracy = getAccuracy(network);
+
+		for (double d : accuracy){
+		    System.out.print (d + " ");
+        }
 	}
 
 
 
 
-	public static double getAccuracy(MultiLayerNetwork network) throws IOException {
+	public static double[] getAccuracy(MultiLayerNetwork network) throws IOException {
 		Files.createDirectories(Paths.get("misses"));
 		int firstId = Trainer.lastValidationIndex()+1;
 		int lastId = Trainer.lastTestIndex();
@@ -49,37 +56,47 @@ public class Evaluator {
 
 		@SuppressWarnings("unused")
 		int hits = 0, misses = 0;
+        double[] accuracy = new double[]{0.0,0.0,0.0};
 
 		List<TrainingData> testSet;
 		for(int fromId = firstId; fromId <= lastId; fromId += BATCH_SIZE) {
 			int toId = Math.min(fromId + BATCH_SIZE, lastId);
 			testSet = FileSystem.load(fromId, toId);
 			for(TrainingData td : testSet) {
-			    System.out.println("Test id: " + td.getId());
+			    //System.out.println("Test id: " + td.getId());
 				double[] groundTruths = td.getFeatures();
+                for (double d : groundTruths){
+                    System.out.print (String.format( "%.2f", d ) + " ");
+                }
+                System.out.println("");
                 INDArray in = Nd4j.create(ImageTool.toScaledDoubles(td.getPixelData()), new int[] {1, 3, td.getWidth(), td.getHeight()});
-
                 INDArray output = network.output(in, false);
-                //System.out.println(output);
-/*
-                double[] binaryVector = NNTool.toBinaryVector(INDArrayTool.toFlatDoubleArray(output));
-				if(ArrayUtils.isEquals(binaryVector, groundTruths)) {
-					hits++;
-				} else {
-					int expectedIdx = getIndex(groundTruths);
-					int actualIdx = getIndex(binaryVector);
-					//File file = new File(String.format("misses/id%d-expected%d-actual%d.png", td.getId(), expectedIdx, actualIdx));
-					//ImageTool.printColoredPngImage(td.getPixelData(), td.getWidth(), file);
-					misses++;
-				}*/
+
+
+                for (double d : INDArrayTool.toFlatDoubleArray(output)){
+                    System.out.print (String.format( "%.2f", d ) + " ");
+                }
+                System.out.println("");
+                System.out.println("");
+
+                for (int i = 0; i < 3; i++){ // TODO do such that it allows other than output length 4
+                	accuracy[i] =  Math.abs(groundTruths[i] - INDArrayTool.toFlatDoubleArray(output)[i]);
+                }
+
+                // System.out.println(output);
+
 			}
 			System.out.println(String.format("Evaluated %d images", toId-firstId));
 		}
 
-		return ((double) hits) / ((double) lastId-firstId+1);
+        for (double d: accuracy) {
+            d = d / ((double) lastId-firstId+1);
+        }
+        return accuracy;
+
 	}
 
-	public static double[] sendOutput(byte[] pixels) throws IOException {
+	public static double[] getOutput(byte[] pixels) throws IOException {
 
 		if (net == null){
 			setNetwork();
@@ -91,9 +108,9 @@ public class Evaluator {
 
 		for(int i = 0; i < out.length(); i++) {
 			output[i] = out.getDouble(i);
-			System.out.print(output[i] + " ");
+			//System.out.print(output[i] + " ");
 		}
-		System.out.println("");
+		//System.out.println("");
 		return output;
 	}
 
@@ -109,5 +126,9 @@ public class Evaluator {
 			}
 		}
 		throw new RuntimeException("Did not found a 1 in the array");
+	}
+
+	public static boolean almostEqual(double a, double b, double eps){
+		return Math.abs(a-b)<eps;
 	}
 }

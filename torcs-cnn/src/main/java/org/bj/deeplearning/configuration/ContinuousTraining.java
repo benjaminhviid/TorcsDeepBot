@@ -6,10 +6,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.deeplearning4j.api.storage.StatsStorage;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
+import org.deeplearning4j.ui.storage.FileStatsStorage;
 import org.deeplearning4j.util.ModelSerializer;
+import org.deeplearning4j.ui.api.UIServer;
+import org.deeplearning4j.ui.stats.StatsListener;
+import org.deeplearning4j.ui.storage.InMemoryStatsStorage;
 import org.bj.deeplearning.dataobjects.FileSystem;
 import org.bj.deeplearning.dataobjects.TrainingData;
 import org.bj.deeplearning.executables.DeadNeuronDetector;
@@ -22,7 +27,8 @@ public abstract class ContinuousTraining implements Trainable {
 	protected MultiLayerNetwork model;
 	protected MultiLayerConfiguration configuration;
 	protected int height, width, featureCount, nEpochs, latestEpoch = 0;
-	private boolean outputDeadNeurons, saveModel;
+	private boolean outputDeadNeurons, saveModel, collectStats, disableStatsWhenTraining;
+    File statsFile;
 
 	public ContinuousTraining() throws FileNotFoundException, IOException {
 		init();
@@ -30,13 +36,22 @@ public abstract class ContinuousTraining implements Trainable {
 
 	@Override
 	public void train(DataSetIterator trainIterator, DataSetIterator testIterator) {
-        for(int i = latestEpoch; i <= nEpochs; i++) {
-            model.fit(trainIterator);
-            System.out.println(String.format("*** Completed epoch %d ***", i));
-            testIterator.reset();
 
-            saveModel(model, i);
-            outputDeadNeurons(model);
+        if (collectStats) {
+            for (int i = latestEpoch; i <= nEpochs; i++) {
+                model.fit(trainIterator);
+                System.out.println(String.format("*** Completed epoch %d ***", i));
+                testIterator.reset();
+                saveModel(model, i);
+                outputDeadNeurons(model);
+            }
+        }
+        else{
+
+            //Second run: Load the saved stats and visualize. Go to http://localhost:9000/train
+            StatsStorage statsStorage = new FileStatsStorage(statsFile);    //If file already exists: load the data from it
+            UIServer uiServer = UIServer.getInstance();
+            uiServer.attach(statsStorage);
         }
 	}
 
@@ -64,6 +79,10 @@ public abstract class ContinuousTraining implements Trainable {
         nEpochs = Integer.parseInt(projectProperties.getProperty("training.epochs"));
         outputDeadNeurons = projectProperties.getProperty("training.outputDeadNeurons").equals("true");
         saveModel = projectProperties.getProperty("training.saveModel").equals("true");
+        collectStats = projectProperties.getProperty("training.collectStats").equals("true");
+        disableStatsWhenTraining = projectProperties.getProperty("training.collectStats").equals("true");
+
+
         initConfig();
         initNetwork();
 
@@ -71,8 +90,7 @@ public abstract class ContinuousTraining implements Trainable {
 	}
 
 	protected void initConfig() {
-		//configuration = BuilderFactory.getConvNet(height, width, featureCount).build();
-		configuration = BuilderFactory.getReducingConvNet(height, width, featureCount).build();
+		configuration = BuilderFactory.getVeryShallowConvNet(height, width, featureCount).build();
 
 	}
 
@@ -84,6 +102,17 @@ public abstract class ContinuousTraining implements Trainable {
 			model = new MultiLayerNetwork(configuration);
 	        model.init();
 		}
-		model.setListeners(new IterationTimeListener(1), new ScoreIterationListener(1));
-	}
+
+        statsFile = new File(FileSystem.getContinuousFolder() + "/UIStorageExampleStats.dl4j");
+
+		if (collectStats) {
+            StatsStorage statsStorage = new FileStatsStorage(statsFile);
+            if (disableStatsWhenTraining)
+                model.setListeners(new IterationTimeListener(1), new ScoreIterationListener(1));
+            else
+                model.setListeners(new IterationTimeListener(1), new StatsListener(statsStorage), new ScoreIterationListener(1));
+
+        }
+
+    }
 }

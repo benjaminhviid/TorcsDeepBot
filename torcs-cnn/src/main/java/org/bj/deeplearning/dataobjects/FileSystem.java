@@ -161,22 +161,7 @@ public class FileSystem {
 
 	public static TrainingData load(int id) {
 		try {
-			//byte[] pixelData = Files.readAllBytes(getPixelDataPath(id));
-			//List<String> lines = Files.readAllLines(getFeaturePath(id));
-			String[] lines = TrainingDataHandler.getSample(id); // plus one to avoid header
-
-			int index = 0;
-
-			double angle = Double.parseDouble(lines[index++]);
-			double speed = Double.parseDouble(lines[index++]);
-			double dist_RL = Double.parseDouble(lines[index++]);
-			double dist_RR =  Double.parseDouble(lines[index++]);
-			int height = (int) Double.parseDouble(lines[index++]);
-			int width = (int) Double.parseDouble(lines[index++]);
-			int _id =  (int) Double.parseDouble(lines[index++]);
-			byte[] pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
-
-			return new TrainingData(angle, speed, dist_RL, dist_RR, height, width, _id, pixelData);
+			return new TrainingData(id, TrainingDataType.MINIMAL);
 
 		} catch(Exception e) {
 			e.printStackTrace();

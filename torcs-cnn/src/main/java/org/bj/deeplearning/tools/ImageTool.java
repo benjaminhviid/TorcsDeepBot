@@ -224,6 +224,37 @@ public class ImageTool extends RandomAccessFile {
         return null;
     }
 
+    public static byte[] bufferedImageToByteArray(BufferedImage image){
+            int iw = image.getWidth();
+            int ih = image.getHeight();
+
+            int bands = image.getSampleModel().getNumBands();
+            if (bands != 3) {
+                throw new RuntimeException("The image does not have 3 color bands.");
+            }
+
+            byte bytes[] = new byte[3 * iw * ih];
+            int index = 0;
+
+            // note that image is processed row by row top to bottom
+            for(int y = 0; y < ih; y++) {
+                for(int x = 0; x < iw; x++) {
+
+                    int pixel = image.getRGB(x, y);
+
+                    // Get pixels
+                    int red = (pixel >> 16) & 0xFF;
+                    int green = (pixel >> 8) & 0xFF;
+                    int blue = pixel & 0xFF;
+                    bytes[index++] = (byte) red;
+                    bytes[index++] = (byte) green;
+                    bytes[index++] = (byte) blue;
+                }
+            }
+            return bytes;
+
+    }
+
 
     public static void main(String[] args) throws IOException {
         // testing:

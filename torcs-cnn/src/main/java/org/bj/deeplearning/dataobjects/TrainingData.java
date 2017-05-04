@@ -1,12 +1,12 @@
 package org.bj.deeplearning.dataobjects;
 
 import org.bj.deeplearning.tools.ImageTool;
+import org.bj.deeplearning.tools.PropertiesReader;
 import org.bj.deeplearning.tools.Utils;
 
 import static org.bj.deeplearning.tools.Utils.clamp;
 import static org.bj.deeplearning.tools.Utils.map;
 
-enum TrainingDataType {MINIMAL, SHALLOW, EXTENSIVE;}
 
 public class TrainingData {
 
@@ -14,7 +14,7 @@ public class TrainingData {
 	private byte[] pixelData;
 	private double[] features;
 	private double angle, speed, marking_L, marking_M, marking_R, dist_L, dist_R;
-	TrainingDataType type;
+	static TrainingDataType type;
 
 	// CONFIG 1: angle, speed, markingM, markingR
 	// CONFIG 2: angle, speed, markingL, markingM, markingR, distL, distR
@@ -23,32 +23,39 @@ private int index = 0;
 
 
     public static int getFeatureCount() {
+    	if (type == TrainingDataType.MINIMAL)
+    		return 3;
 		return TrainingDataHandler.getNumberOfGroundTruths();
 	}
 
 	public TrainingData(int id, TrainingDataType type){
+		int _id = id;
+		if (_id == 0)
+			_id = 1;
 
-        String[] sample = TrainingDataHandler.getSample(id); // plus one to avoid header
+		String[] sample = TrainingDataHandler.getSample(_id);
 		this.type = type;
-		angle = Double.parseDouble(sample[index++]);
-		angle = clamp(angle, -Math.PI, Math.PI);
-		angle = map(speed, -Math.PI, Math.PI, 0.1, 0.9);
 
         speed = Double.parseDouble(sample[index++]);
         speed = clamp(speed, 0, 200);
-        speed = map(speed, 0, 200, 0.1, 0.9);
+        speed = map(speed, 0.0, 200.0, 0.0, 1.0);
+        
+		angle = Double.parseDouble(sample[index++]);
+		angle = clamp(angle, -Math.PI, Math.PI);
+		angle = map(angle, -Math.PI, Math.PI, 0.0, 1.0);
 
-
+		// when clamping trackpos we use -2, 2, as we give 2 x track width as track boundary in each side
 		if (type == TrainingDataType.MINIMAL || type == TrainingDataType.EXTENSIVE){
 			double trackPos = Double.parseDouble(sample[index++]);
+			marking_M = map(clamp(trackPos, -2, 2), -2.0, 2.0, 0.0, 1.0);
 
 			if (type == TrainingDataType.EXTENSIVE) {
-				marking_L = 0.9 - map(clamp(trackPos, -1, 1), -1.0, 1.0, 0.1, 0.9);
+				marking_L = 0.9 - map(clamp(trackPos, -1.0, 1.0), -1.0, 1.0, 0.0, 1.0);
+				marking_R = 0.9 - map(Utils.clamp(trackPos, -1, 1), -1.0, 1.0, 0.1, 0.9);
+				marking_R = map(marking_R, 0.1, 0.9, 0.9, 0.1);
 			}
 
-			marking_M = map(clamp(trackPos, -1, 1), -1.0, 1.0, 0.1, 0.9);
-			marking_R = 0.9 - map(Utils.clamp(trackPos, -1, 1), -1.0, 1.0, 0.1, 0.9);
-		    marking_R = map(marking_R, 0.1, 0.9, 0.9, 0.1);
+		//
 		}
 
 		if (type == TrainingDataType.SHALLOW) {
@@ -73,13 +80,12 @@ private int index = 0;
 			id = (int) Double.parseDouble(sample[index++]);
 		}
 		else {
-        	height = 210; // TODO: get from properties file instead
-        	width = 280;
+        	height = Integer.parseInt(PropertiesReader.getProjectProperties().getProperty("training.image.height"));
+        	width =  Integer.parseInt(PropertiesReader.getProjectProperties().getProperty("training.image.width"));
         	this.id = id;
 
 		}
 		pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
-
         features = calculateFeatures();
     }
 
@@ -99,8 +105,14 @@ private int index = 0;
 	}
 
 	private double[] calculateFeatures() {
-
-		if (type == TrainingDataType.SHALLOW || type == TrainingDataType.MINIMAL) {
+		if (type == TrainingDataType.MINIMAL){
+			double[] result = new double[3];
+			result[0] = speed;
+			result[1] = angle;
+			result[2] = marking_M;
+			return result;
+		}
+		else if (type == TrainingDataType.SHALLOW ) {
 
 			double[] result = new double[4];
 			result[0] = angle;
@@ -109,6 +121,7 @@ private int index = 0;
 			result[3] = marking_R;
 			return result;
 		}
+
 		else {
 			double[] result = new double[7];
 			result[0] = angle;

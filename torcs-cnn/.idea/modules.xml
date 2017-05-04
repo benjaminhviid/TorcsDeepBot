@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/torcs-cnn.iml" filepath="$PROJECT_DIR$/torcs-cnn.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../torcs-neat/torcsai.iml" filepath="$PROJECT_DIR$/../torcs-neat/torcsai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../torcs-neat/torcs-neat.iml" filepath="$PROJECT_DIR$/../torcs-neat/torcs-neat.iml" />
     </modules>
   </component>
 </project>

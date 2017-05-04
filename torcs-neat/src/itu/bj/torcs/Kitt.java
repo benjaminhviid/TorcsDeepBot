@@ -1,7 +1,5 @@
 package itu.bj.torcs;
 
-import itu.bj.torcs.Controller.Stage;
-
 public class Kitt extends Controller {
 	/* Gear Changing Constants */
 	final int[] gearUp = { 5000, 6000, 6000, 6500, 7000, 0 };

@@ -11,6 +11,8 @@ import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 
+import static org.bj.deeplearning.tools.Utils.resize;
+
 public class DataCollector {
 
 	private static final DataCollector _instance = new DataCollector();
@@ -84,8 +86,6 @@ public class DataCollector {
 				}
 				ScheduleDataCollection(ms);
 			}
-
-
 		}
 
 		else{
@@ -130,7 +130,7 @@ public class DataCollector {
 
 	static void GetData(){
 		try {
-			BufferedImage image = new Robot().createScreenCapture(new Rectangle(0,offsetY, width, height));
+			BufferedImage image = new Robot().createScreenCapture(new Rectangle(0, offsetY, width, height));
 			BufferedImage resized = resize(image, 280, 210);
 
 			String screenshotFolder = "/screenshots";
@@ -203,15 +203,6 @@ public class DataCollector {
 	public boolean isRecording(){
 		return recording;
 	}
-	public static BufferedImage resize(BufferedImage img, int newW, int newH) {
-		Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-		BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_RGB);
 
-		Graphics2D g2d = dimg.createGraphics();
-		g2d.drawImage(tmp, 0, 0, null);
-		g2d.dispose();
-
-		return dimg;
-	}
 
 }

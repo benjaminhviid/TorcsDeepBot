@@ -1,21 +1,7 @@
 package itu.bj.torcs;
 
-
-import java.awt.AWTException;
-import java.awt.HeadlessException;
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-import javax.imageio.ImageIO;
-import java.util.Random;
-import itu.bj.torcs.Controller.Stage;
-
 
 
 

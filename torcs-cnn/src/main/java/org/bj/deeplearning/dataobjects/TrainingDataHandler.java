@@ -1,16 +1,12 @@
 package org.bj.deeplearning.dataobjects;
 
+import org.bj.deeplearning.tools.ImageTool;
 import org.bj.deeplearning.tools.PropertiesReader;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -42,11 +38,75 @@ public class TrainingDataHandler {
             System.out.println(header);
         }
 
+       // writePixelDataToTextFile();
     }
 
+    static FileWriter writer;
+    public static void writePixelDataToTextFile() throws IOException {
+
+        int counter = 0;
+        File dir = new File(TrainingDataHandler.class.getClassLoader().getResource("torcsdata/screenshots").getPath());
+        File[] directoryListing = dir.listFiles();
+
+
+        Arrays.sort(directoryListing, new Comparator<File>() {
+            public int compare(File f1, File f2) {
+                try {
+
+                    int i1 = Integer.parseInt(f1.getName().substring(10, f1.getName().length() - 4));
+                    int i2 =  Integer.parseInt(f2.getName().substring(10, f2.getName().length() - 4));
+                    return i1 - i2;
+                } catch(NumberFormatException e) {
+                    throw new AssertionError(e);
+                }
+            }
+        });
+
+
+        if (directoryListing != null) {
+            for (File child : directoryListing) {
+
+                byte[] pixelData = ImageTool.bufferedImageToByteArray(child.getPath());
+                System.out.println(pixelData.length);
+                //WriteTextToCSV(Arrays.toString(pixelData));
+                //counter++;
+
+                if (counter % 1000 == 0){
+                    System.out.println(counter);
+                }
+            }
+        } else {
+            // Handle the case where dir is not really a directory.
+            // Checking dir.isDirectory() above would not be sufficient
+            // to avoid race conditions with another process that deletes
+            // directories.
+        }
+
+
+
+
+    }
+
+    static void WriteTextToCSV (String value){
+        //String PIXELDATA_PATH = TrainingDataHandler.class.getClassLoader().getResource("torcsdata/pixeldata.csv").getPath();
+        String PIXELDATA_PATH = "/home/benjaminhviid/torcsdeepbot/torcs-cnn/src/main/resources/torcsdata/pixeldata.txt";
+        try {
+            writer = new FileWriter(PIXELDATA_PATH, true);
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(value);
+
+            writer.write(sb.toString());
+            writer.write("\n");
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
     private static int numberOfNonGroundTruthsInTrainingDataSet= 0; // height, width, id;
-
 
     public static List<TrainingData> getTrainingData(int fromId, int toId) {
 
@@ -103,11 +163,14 @@ public class TrainingDataHandler {
     }*/
 
     public static int getNumberOfGroundTruths(){
-        if (type == TrainingDataType.EXTENSIVE || type == TrainingDataType.MINIMAL){
-            return 4;
+        if (type == TrainingDataType.EXTENSIVE){
+            return 7;
+        }
+        else if (type == TrainingDataType.MINIMAL){
+            return 3;
         }
         else{
-            return 7;
+            return 4;
         }
     }
 
@@ -153,6 +216,8 @@ public static List<String> getGroundTruthLabels() {
         reader.close();
         String[] headerArray = headers.split(";");
         for (String header : headerArray) {
+            if (type == TrainingDataType.MINIMAL && result.size() == 3)
+                continue;
             result.add(header.trim());
         }
     } catch (IOException e) {
@@ -186,8 +251,8 @@ public static List<String> getGroundTruthLabels() {
         return indicesToIntList(IntStream.rangeClosed(from, to).boxed(), to-from + 1);
     }
 
-    public static List<Integer> getRandomIndicesIntToList(int numberOfIndices){
-        List<Integer> range = IntStream.rangeClosed(0, getSampleCount()).boxed().collect(Collectors.toList());
+    public static List<Integer> getRandomIndicesIntToList(int numberOfIndices){ // TODO check that both screenshots and samples are shuffled
+        List<Integer> range = IntStream.rangeClosed(1, getSampleCount()).boxed().collect(Collectors.toList());
         Collections.shuffle(range);
         return  indicesToIntList(range.parallelStream(), numberOfIndices);
     }

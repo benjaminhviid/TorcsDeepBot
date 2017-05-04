@@ -3,10 +3,14 @@
  */
 package itu.bj.torcs;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 import itu.bj.torcs.Controller.Stage;
+import org.bj.deeplearning.executables.Evaluator;
+import org.bj.deeplearning.tools.ImageTool;
+import org.bj.deeplearning.tools.Utils;
 
 /**
  * @author Daniele Loiacono
@@ -25,7 +29,8 @@ public class Client {
 	private static String trackName;
 	private static Controller driver;
 	private static Double finalScore; 
-	private static PrintWriter writer; 
+	private static PrintWriter writer;
+	private static boolean enableCNN = true;
 
 
 
@@ -84,7 +89,7 @@ public class Client {
 			/*
 			 * Start to drive
 			 */
-			DataCollector.instance().StartDataCollection(333);
+			//DataCollector.instance().StartDataCollection(333);
 
 
 			long currStep = 0;
@@ -130,6 +135,18 @@ public class Client {
 					}
 
 					if (currStep < maxSteps || maxSteps == 0){
+
+						if (enableCNN){
+							try {
+								byte[] pixeldata = ImageTool.bufferedImageToByteArray(Utils.getScreenshot());
+								double[] out = Evaluator.getOutput(pixeldata);
+								CNNSensorModel.getInstance().setValues(out[0], out[1], out[2]);
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+
 						action = driver.control(new MessageBasedSensorModel(
 								inMsg));
 						}
