@@ -284,7 +284,7 @@ class MyThread implements Runnable {
 				byte[] pixeldata = ImageTool.bufferedImageToByteArray(resize(Utils.getScreenshot(480, 640), 80, 60));
 				double[] out = Evaluator.getOutput(pixeldata);
 				CNNSensorModel.getInstance().setValues(out[0], out[1]);
-				ImageTool.printColoredPngImage(pixeldata, 80, new File("img" + counter + ".png"));
+				//ImageTool.printColoredPngImage(pixeldata, 80, new File("img" + counter + ".png"));
 			}
 
 		} catch (Exception e) {
