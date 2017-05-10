@@ -17,6 +17,8 @@ import javax.imageio.stream.FileImageInputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.bj.deeplearning.dataobjects.TrainingData;
+import org.bj.deeplearning.dataobjects.TrainingDataHandler;
 
 
 //import static com.sun.tools.doclint.Entity.image;
@@ -43,7 +45,7 @@ public class ImageTool extends RandomAccessFile {
         DataBuffer buffer = new DataBufferByte(flipped, flattened.length);
 
         //3 bytes per pixel: red, green, blue
-        WritableRaster raster = Raster.createInterleavedRaster(buffer, width, height, 3 * width, 3, new int[]{0, 1, 2}, (Point) null);
+        WritableRaster raster = Raster.createInterleavedRaster(buffer, width, height, 3 * width, 3, new int[]{0, 1, 2}, null);
         ColorModel cm = new ComponentColorModel(ColorModel.getRGBdefault().getColorSpace(), false, true, Transparency.OPAQUE, DataBuffer.TYPE_BYTE);
         BufferedImage image = new BufferedImage(cm, raster, true, null);
 
@@ -262,11 +264,11 @@ public class ImageTool extends RandomAccessFile {
         //System.out.println(java.util.Arrays.toString(img));
 
 
-        /*TrainingData images = TrainingDataHandler.instance().getTrainingData(10, 10).get(0);
+        TrainingData images = TrainingDataHandler.getTrainingData(10, 10).get(0);
         printColoredPngImage(images.getPixelData(), images.getWidth(), new File("img.png"));
         printRedColoredPngImage(images.getPixelData().clone(), images.getWidth(), new File("red.png"));
         printGreenColoredPngImage(images.getPixelData().clone(), images.getWidth(), new File("green.png"));
         printBlueColoredPngImage(images.getPixelData().clone(), images.getWidth(), new File("blue.png"));
-        */
+
     }
 }

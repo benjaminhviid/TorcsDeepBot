@@ -32,7 +32,7 @@ public interface BufferedImageTransformer {
 	/**
 	 * @param anImg
 	 */
-	public void setImage( BufferedImage anImg );
+    void setImage(BufferedImage anImg);
 
 	/**
 	 * scales, rotates, translates, crops image
@@ -40,5 +40,5 @@ public interface BufferedImageTransformer {
 	 * @param parms
 	 * @return transformed image
 	 */
-	public Image transform( TransformParameters parms );
+    Image transform(TransformParameters parms);
 }

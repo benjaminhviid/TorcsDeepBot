@@ -3,14 +3,19 @@
  */
 package itu.bj.torcs;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.Buffer;
 import java.util.StringTokenizer;
 
 import itu.bj.torcs.Controller.Stage;
 import org.bj.deeplearning.executables.Evaluator;
 import org.bj.deeplearning.tools.ImageTool;
 import org.bj.deeplearning.tools.Utils;
+
+import static org.bj.deeplearning.tools.Utils.resize;
 
 /**
  * @author Daniele Loiacono
@@ -31,11 +36,11 @@ public class Client {
 	private static Double finalScore; 
 	private static PrintWriter writer;
 	private static boolean enableCNN = true;
-
+	private static MyThread thread = new MyThread();
 
 
 	public Client(Controller driver){
-		this.driver = driver;
+		Client.driver = driver;
 
 	}
 
@@ -64,7 +69,7 @@ public class Client {
 		//driver = new Kitt();
         driver.setStage(stage);
 		driver.setTrackName(trackName);
-
+		Thread th = new Thread(thread);
 		/* Build init string */
 		float[] angles = driver.initAngles();
 		String initStr = clientId + "(init";
@@ -75,6 +80,11 @@ public class Client {
 
 		long curEpisode = 0;
 		boolean shutdownOccurred = false;
+
+
+		if (enableCNN){
+			th.start();
+		}
 		do {
 
 			/*
@@ -136,21 +146,10 @@ public class Client {
 
 					if (currStep < maxSteps || maxSteps == 0){
 
-						if (enableCNN){
-							try {
-								byte[] pixeldata = ImageTool.bufferedImageToByteArray(Utils.getScreenshot());
-								double[] out = Evaluator.getOutput(pixeldata);
-								CNNSensorModel.getInstance().setValues(out[0], out[1], out[2]);
-
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						}
 
 						action = driver.control(new MessageBasedSensorModel(
 								inMsg));
 						}
-
 
 					currStep++;
 					mySocket.send(action.toString());
@@ -254,7 +253,7 @@ public class Client {
 	private static Controller load(String name) {
 		Controller controller=null;
 		try {
-			controller = (Controller) (Object) Class.forName(name)
+			controller = (Controller) Class.forName(name)
 					.newInstance();
 		} catch (ClassNotFoundException e) {
 			System.out.println(name	+ " is not a class name");
@@ -271,5 +270,25 @@ public class Client {
 	
 	public static Double getFinalScore(){
 		return ((TorcsNeatController)driver).getScore();
+	}
+}
+
+class MyThread implements Runnable {
+
+	public void run()
+	{
+		int counter = 0;
+		try {
+			while (true) {
+				counter++;
+				byte[] pixeldata = ImageTool.bufferedImageToByteArray(resize(Utils.getScreenshot(480, 640), 80, 60));
+				double[] out = Evaluator.getOutput(pixeldata);
+				CNNSensorModel.getInstance().setValues(out[0], out[1]);
+				ImageTool.printColoredPngImage(pixeldata, 80, new File("img" + counter + ".png"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

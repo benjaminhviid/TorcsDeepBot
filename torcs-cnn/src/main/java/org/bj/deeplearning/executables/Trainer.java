@@ -33,8 +33,8 @@ public class Trainer {
 	}
 
 	private static void doTrain() throws IOException {
-		DataSetIterator testIterator = getIterator(batchSize, testSize);
 		DataSetIterator trainIterator = getIterator(batchSize, trainSize);
+		DataSetIterator testIterator = getIterator(batchSize, testSize);
 
 		getTrainer().train(trainIterator, testIterator);
 	}

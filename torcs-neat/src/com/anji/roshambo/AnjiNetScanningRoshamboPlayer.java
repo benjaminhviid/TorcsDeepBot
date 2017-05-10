@@ -157,7 +157,7 @@ public AnjiNetScanningRoshamboPlayer( AnjiNet aNet, Random aRand ) {
  * int)
  */
 public AnjiNetScanningRoshamboPlayer( AnjiNet aNet, int anActivationCycles ) {
-	this( aNet, (Random) null, anActivationCycles, 1, 0 );
+	this( aNet, null, anActivationCycles, 1, 0 );
 }
 
 /**

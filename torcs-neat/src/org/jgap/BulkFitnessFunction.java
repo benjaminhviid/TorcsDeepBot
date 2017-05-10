@@ -39,10 +39,10 @@ public interface BulkFitnessFunction extends Serializable {
 	 * @param subjects <code>List</code> contains <code>Chromosome</code> objects for which
 	 * the fitness values must be computed and set.
 	 */
-	public abstract void evaluate( List subjects );
+    void evaluate(List subjects);
 
 	/**
 	 * @return int maximum possible fitness value this function will return
 	 */
-	public int getMaxFitnessValue();
+    int getMaxFitnessValue();
 }

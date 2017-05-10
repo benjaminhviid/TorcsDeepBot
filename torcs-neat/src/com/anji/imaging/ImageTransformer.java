@@ -37,6 +37,6 @@ public interface ImageTransformer {
 	 * @param scaleY
 	 * @return transformed pixels
 	 */
-	public int[] transform( int translateX, int translateY, double rotate, double scaleX,
-			double scaleY );
+    int[] transform(int translateX, int translateY, double rotate, double scaleX,
+                    double scaleY);
 }

@@ -45,12 +45,7 @@ public void initializeBoard() {
  */
 public boolean checkLegalMove( int newMove ) {
 	boolean legalMove;
-	if ( boardState[ newMove ] == 0 ) {
-		legalMove = true;
-	}
-	else {
-		legalMove = false;
-	}
+    legalMove = boardState[newMove] == 0;
 	return legalMove;
 }
 

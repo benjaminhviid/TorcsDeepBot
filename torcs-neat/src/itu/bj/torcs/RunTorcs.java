@@ -1,9 +1,5 @@
 package itu.bj.torcs;
 
-import org.bj.deeplearning.dataobjects.TrainingData;
-import org.bj.deeplearning.dataobjects.TrainingDataType;
-import org.bj.deeplearning.executables.Evaluator;
-
 import java.io.IOException;
 
 public class RunTorcs {
@@ -12,7 +8,7 @@ public class RunTorcs {
 	public static void main(String[] args) {
 
 		String[] arguments = {
-				"itu.bj.torcs.CNNBot",
+				"itu.bj.torcs.SimpleDriver",
 				"host:localhost",
 				"port:3001",
 				"maxEpisodes:1",

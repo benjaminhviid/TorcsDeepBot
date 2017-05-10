@@ -887,11 +887,9 @@ private boolean comparePattern( int[] history1, int begin1, int end1, int[] hist
 			counter1++;
 			counter2++;
 		}
-		if ( counter1 == end1 )
-			return true;
-		return false;
+        return counter1 == end1;
 
-	}
+    }
 	return false;
 }
 

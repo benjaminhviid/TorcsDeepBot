@@ -73,7 +73,7 @@ public class DeadNeuronDetector {
 		}
 	}
 
-	public static void getDeadNeurons(File networkFile, int sampleSize) throws FileNotFoundException, IOException {
+	public static void getDeadNeurons(File networkFile, int sampleSize) throws IOException {
 		MultiLayerNetwork network = ModelSerializer.restoreMultiLayerNetwork(new FileInputStream(networkFile));
 		getDeadNeurons(network, sampleSize);
 	}

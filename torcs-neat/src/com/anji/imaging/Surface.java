@@ -38,17 +38,17 @@ public interface Surface extends Configurable {
 /**
  * class to perform image transformation; subclass of BufferedImageTransformer
  */
-public final static String TRANSFORMER_CLASS_KEY = "surface.transformer";
+String TRANSFORMER_CLASS_KEY = "surface.transformer";
 
 /**
  * final size of surface to which images will be scaled
  */
-public final static String SURFACE_WIDTH_KEY = "surface.width";
+String SURFACE_WIDTH_KEY = "surface.width";
 
 /**
  * final size of surface to which images will be scaled
  */
-public final static String SURFACE_HEIGHT_KEY = "surface.height";
+String SURFACE_HEIGHT_KEY = "surface.height";
 
 /**
  * Set source data of image. The image file is scaled (using area averaging) to surface size.
@@ -56,7 +56,7 @@ public final static String SURFACE_HEIGHT_KEY = "surface.height";
  * @param file
  * @throws IOException
  */
-public void setImage( File file ) throws IOException;
+void setImage(File file) throws IOException;
 
 /**
  * transform image via translate, rotate, scale, crop
@@ -64,27 +64,27 @@ public void setImage( File file ) throws IOException;
  * @param parms
  * @return transformed image flattened into 1D array
  */
-public int[] transform( TransformParameters parms );
+int[] transform(TransformParameters parms);
 
 /**
  * @return source image
  */
-public int[] getData();
+int[] getData();
 
 /**
  * @return width of source image
  */
-public int getWidth();
+int getWidth();
 
 /**
  * @return height of source image
  */
-public int getHeight();
+int getHeight();
 
 /**
  * @param x
  * @param y
  * @return value of pixel at location x,y
  */
-public int getValue( int x, int y );
+int getValue(int x, int y);
 }

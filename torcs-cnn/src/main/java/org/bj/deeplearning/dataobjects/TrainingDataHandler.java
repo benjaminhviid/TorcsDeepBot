@@ -167,7 +167,7 @@ public class TrainingDataHandler {
             return 7;
         }
         else if (type == TrainingDataType.MINIMAL){
-            return 3;
+            return 2;
         }
         else{
             return 4;

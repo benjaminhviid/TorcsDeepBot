@@ -49,6 +49,6 @@ public interface CoordinateTranslator {
 	 * @param coords
 	 * @param max
 	 */
-	public void transform( IntLocation2D coords, int max );
+    void transform(IntLocation2D coords, int max);
 
 }

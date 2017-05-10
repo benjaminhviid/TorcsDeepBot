@@ -20,12 +20,10 @@ public class CNNSensorModel {
         return instance;
     }
 
-    private double speed = 0.0;
     private double angleToTrackAxis = 0.0;
     private double trackPosition = 0.0;
 
-    public void setValues(double _speed, double _angleToTrackAxis, double _trackPos){
-        this.speed = revertNormalizedSpeed(_speed);
+    public void setValues(double _angleToTrackAxis, double _trackPos){
         this.angleToTrackAxis = revertNormalizedAngleToTrackAxis(_angleToTrackAxis);
         this.trackPosition = revertNormalizedTrackPosition(_trackPos);
     }
@@ -34,26 +32,18 @@ public class CNNSensorModel {
         return angleToTrackAxis;
     }
 
-    public double getSpeed(){
-        return speed;
-    }
-
     public double getTrackPosition(){
         return trackPosition;
     }
 
-    private double revertNormalizedSpeed(double speed){
-        return map(speed, 0.1, 0.9, 0.0, 200.0);
-
-    }
 
     private double revertNormalizedAngleToTrackAxis(double angleToTrackAxis){
-        return map(angleToTrackAxis,0.1, 0.9,  -Math.PI, Math.PI);
+        return map(angleToTrackAxis,0.0, 1.0,  -Math.PI, Math.PI);
 
     }
 
     private double revertNormalizedTrackPosition(double trackPosition){
-        return map(trackPosition, 0.1, 0.9, -1.0, 1.0);
+        return map(trackPosition, 0.0, 1, -2.0, 2.0);
 
     }
 

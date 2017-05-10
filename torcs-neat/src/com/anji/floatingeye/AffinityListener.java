@@ -36,11 +36,11 @@ public interface AffinityListener {
 	 * @param pos
 	 * @param value
 	 */
-	public void updateAffinity( IntLocation2D pos, double value );
+    void updateAffinity(IntLocation2D pos, double value);
 	
 	/**
 	 * reset affinity history
 	 */
-	public void reset();
+    void reset();
 }
 

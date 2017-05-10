@@ -73,7 +73,7 @@ public class DrunkKitt extends Controller {
 
 	public void shutdown() {
 		System.out.println("Bye bye!");
-		DataCollector.instance().Pause();
+		DataCollector.Pause();
 	}
 
 	private int getGear(SensorModel sensors) {

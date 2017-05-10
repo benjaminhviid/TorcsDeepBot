@@ -24,19 +24,19 @@ public interface Tournament {
 /**
  * remove all contestants added via <code>addContestant()</code>
  */
-public void clearContestants();
+void clearContestants();
 
 /**
  * @param contestant <code>Player</code> to be added.
  */
-public void addContestant( Player contestant );
+void addContestant(Player contestant);
 
 /**
  * Play full tournament.
  * @return <code>List</code> contains <code>TournamentPlayerResults</code> objects, sorted
  * in descending order of score
  */
-public List playTournament();
+List playTournament();
 
 /**
  * @return maximum possible score a contestant can achieve in this tournament; this value may
@@ -44,7 +44,7 @@ public List playTournament();
  * <code>TournamentPlayerResults.getTournamentScore()</code> not
  * <code>TournamentPlayerResults.getScore()</code>
  */
-public int getMaxScore();
+int getMaxScore();
 
 /**
  * @return minimum possible score a contestant can achieve in this tournament; this value may
@@ -52,6 +52,6 @@ public int getMaxScore();
  * <code>TournamentPlayerResults.getTournamentScore()</code> not
  * <code>TournamentPlayerResults.getScore()</code>
  */
-public int getMinScore();
+int getMinScore();
 
 }

@@ -31,48 +31,48 @@ public interface Board {
 /**
  * @return number of spaces in a single row or column
  */
-public int getBoardSize();
+int getBoardSize();
 
 /**
  * set up board to initial state before game has started
  */
-public void initializeBoard();
+void initializeBoard();
 
 /**
  * @param newMove position in which to place next move
  * @return false if <code>newMove</code> would create an invalid board state, true otherwise
  */
-public boolean checkLegalMove( int newMove );
+boolean checkLegalMove(int newMove);
 
 /**
  * updates board state such that position <code>newMove</code> will now equal 1
  * @param newMove position in which to place next move; must be between >= 0 and < size of board
  */
-public void updateBoard( int newMove );
+void updateBoard(int newMove);
 
 /**
  * @return boolean true if state of board represents a win for friendly pieces (those with value
  * 1), false otherwise
  */
-public boolean checkForWin();
+boolean checkForWin();
 
 /**
  * @return true if state of board represents a tie, false otherwise
  */
-public boolean checkForTie();
+boolean checkForTie();
 
 /**
  * @return string representation of board
  */
-public String displayBoard();
+String displayBoard();
 
 /**
  * @return int[] representation of board; friendly pieces are 1, opponent -1, empty spaces 0
  */
-public int[] getBoardState();
+int[] getBoardState();
 
 /**
  * swap all friendly pieces for opponent and vice versa
  */
-public void swap();
+void swap();
 }

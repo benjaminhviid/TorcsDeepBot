@@ -34,5 +34,5 @@ public interface PlayerTranscriber extends Transcriber {
  * @return <code>Player</code> phenotype
  * @throws TranscriberException
  */
-public Player newPlayer( Chromosome c ) throws TranscriberException;
+Player newPlayer(Chromosome c) throws TranscriberException;
 }

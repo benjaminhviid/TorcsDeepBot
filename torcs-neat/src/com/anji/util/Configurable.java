@@ -31,6 +31,6 @@ public interface Configurable {
  * @param props configuration parameters
  * @throws Exception
  */
-public void init( Properties props ) throws Exception;
+void init(Properties props) throws Exception;
 }
 

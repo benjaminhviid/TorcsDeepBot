@@ -32,22 +32,22 @@ public interface ActivationFunction {
  * @param input
  * @return double result of applying activation function to <code>input</code>
  */
-public abstract double apply( double input );
+double apply(double input);
 
 /**
  * @return ceiling value for this function
  */
-public double getMaxValue();
+double getMaxValue();
 
 /**
  * @return floor value for this function
  */
-public double getMinValue();
+double getMinValue();
 
 /**
  * @return number corresponding to cost of activation in resources
  */
-public long cost();
+long cost();
 
 }
 

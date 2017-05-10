@@ -28,6 +28,6 @@ public interface IteratedPlayer extends Player {
  * @param numIterations number of iterations for current game; player will be reset again before
  * playing another game
  */
-public void reset( int numIterations );
+void reset(int numIterations);
 
 }

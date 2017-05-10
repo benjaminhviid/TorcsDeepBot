@@ -14,5 +14,5 @@ public interface BoardPlayer extends Player {
  * @param boardState
  * @return next move
  */
-public int move( int[] boardState );
+int move(int[] boardState);
 }

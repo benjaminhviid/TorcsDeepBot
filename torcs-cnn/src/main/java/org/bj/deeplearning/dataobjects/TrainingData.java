@@ -23,9 +23,7 @@ private int index = 0;
 
 
     public static int getFeatureCount() {
-    	if (type == TrainingDataType.MINIMAL)
-    		return 3;
-		return TrainingDataHandler.getNumberOfGroundTruths();
+   		return TrainingDataHandler.getNumberOfGroundTruths();
 	}
 
 	public TrainingData(int id, TrainingDataType type){
@@ -34,7 +32,7 @@ private int index = 0;
 			_id = 1;
 
 		String[] sample = TrainingDataHandler.getSample(_id);
-		this.type = type;
+		TrainingData.type = type;
 
         speed = Double.parseDouble(sample[index++]);
         speed = clamp(speed, 0, 200);
@@ -77,12 +75,12 @@ private int index = 0;
 		if (type == TrainingDataType.SHALLOW) {
 			height = (int) Double.parseDouble(sample[index++]);
 			width = (int) Double.parseDouble(sample[index++]);
-			id = (int) Double.parseDouble(sample[index++]);
+			this.id = (int) Double.parseDouble(sample[index++]);
 		}
 		else {
         	height = Integer.parseInt(PropertiesReader.getProjectProperties().getProperty("training.image.height"));
         	width =  Integer.parseInt(PropertiesReader.getProjectProperties().getProperty("training.image.width"));
-        	this.id = id;
+        	this.id = Integer.parseInt(sample[index++]);
 
 		}
 		pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
@@ -106,10 +104,10 @@ private int index = 0;
 
 	private double[] calculateFeatures() {
 		if (type == TrainingDataType.MINIMAL){
-			double[] result = new double[3];
-			result[0] = speed;
-			result[1] = angle;
-			result[2] = marking_M;
+			double[] result = new double[2];
+			result[0] = angle;
+			result[1] = marking_M;
+			//result[2] = marking_M;
 			return result;
 		}
 		else if (type == TrainingDataType.SHALLOW ) {

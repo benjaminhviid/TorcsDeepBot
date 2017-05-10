@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.sun.org.apache.xpath.internal.operations.Mult;
 import org.apache.commons.lang.ArrayUtils;
+import org.bj.deeplearning.dataobjects.TrainingDataHandler;
 import org.bj.deeplearning.tools.INDArrayTool;
 import org.bj.deeplearning.tools.NNTool;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
@@ -56,7 +57,7 @@ public class Evaluator {
 
 		@SuppressWarnings("unused")
 		int hits = 0, misses = 0;
-        double[] accuracy = new double[]{0.0,0.0,0.0};
+        double[] accuracy = new double[]{0.0,0.0};
 
 		List<TrainingData> testSet;
 		for(int fromId = firstId; fromId <= lastId; fromId += BATCH_SIZE) {
@@ -79,7 +80,7 @@ public class Evaluator {
                 System.out.println("");
                 System.out.println("");
 
-                for (int i = 0; i < 3; i++){ // TODO do such that it allows other than output length 4
+                for (int i = 0; i < 2; i++){ // TODO do such that it allows other than output length 4
                 	accuracy[i] =  Math.abs(groundTruths[i] - INDArrayTool.toFlatDoubleArray(output)[i]);
                 }
 
@@ -102,7 +103,7 @@ public class Evaluator {
 			setNetwork();
 		}
 
-		INDArray in = Nd4j.create(ImageTool.toScaledDoubles(pixels), new int[] {1, 3, 280, 210});
+		INDArray in = Nd4j.create(ImageTool.toScaledDoubles(pixels), new int[] {1, 3, TrainingDataHandler.getWidth(), TrainingDataHandler.getHeight()});
 		INDArray out = net.output(in, false);
 		double[] output = new double[out.length()];
 

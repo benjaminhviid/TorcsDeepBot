@@ -36,23 +36,23 @@ public interface Game {
  * @return <code>GameResults</code> for this game only; these totals are also added to each
  * players results
  */
-public GameResults play( PlayerResults contestantResults, PlayerResults opponentResults );
+GameResults play(PlayerResults contestantResults, PlayerResults opponentResults);
 
 /**
  * @return class of which all players must be subclass (or implementor, if interface); must be
  * implementor of <code>Player</code>
  */
-public Class requiredPlayerClass();
+Class requiredPlayerClass();
 
 /**
  * @param weights
  * @return maximum possible score for a single game, given these scoring weights
  */
-public int getMaxScore( ScoringWeights weights );
+int getMaxScore(ScoringWeights weights);
 
 /**
  * @param weights
  * @return minimum possible score for a single game game, given these scoring weights
  */
-public int getMinScore( ScoringWeights weights );
+int getMinScore(ScoringWeights weights);
 }

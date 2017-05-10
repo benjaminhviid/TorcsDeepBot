@@ -19,9 +19,9 @@ public abstract class Controller {
 				return UNKNOWN;
 			}			
 		}
-	};
-	
-	private Stage stage;
+	}
+
+    private Stage stage;
 	private String trackName;
 	
 	public float[] initAngles()	{

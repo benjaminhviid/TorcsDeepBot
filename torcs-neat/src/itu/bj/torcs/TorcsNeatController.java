@@ -54,7 +54,7 @@ public class TorcsNeatController extends Controller {
 	public Action control(SensorModel sensors) {
 		// TODO Auto-generated method stub
 		if (!DataCollector.instance().isRecording())
-			DataCollector.instance().Resume();
+			DataCollector.Resume();
 		double distance = sensors.getDistanceFromStartLine();
 		
 		updateDiff(distance);
@@ -139,7 +139,7 @@ public class TorcsNeatController extends Controller {
 
 	@Override
 	public void shutdown() {
-		DataCollector.instance().Pause();
+		DataCollector.Pause();
 	}
 
 	private double clamp(double value, double min, double max){

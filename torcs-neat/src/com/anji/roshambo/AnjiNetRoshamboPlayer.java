@@ -124,7 +124,7 @@ public AnjiNetRoshamboPlayer( AnjiNet aNet, Random aRand ) {
  * @see AnjiNetRoshamboPlayer#AnjiNetRoshamboPlayer(AnjiNet, Random, int, int)
  */
 public AnjiNetRoshamboPlayer( AnjiNet aNet, int anActivationCycles ) {
-	this( aNet, (Random) null, anActivationCycles, 1 );
+	this( aNet, null, anActivationCycles, 1 );
 }
 
 /**

@@ -21,11 +21,11 @@ public interface Player {
 /**
  * @return String unique ID
  */
-public String getPlayerId();
+String getPlayerId();
 
 /**
  * reset player state; after a call to reset, the player should be in the same state as it was
  * when created; i.e., it has no memory of previous games played
  */
-public void reset();
+void reset();
 }

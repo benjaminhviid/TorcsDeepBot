@@ -593,8 +593,8 @@ public Class getClassProperty( String key, Class defaultVal ) {
  * @throws FileNotFoundException
  * @throws IOException
  */
-public static double[][] loadArrayFromFile( InputStream in ) throws FileNotFoundException,
-		IOException {
+public static double[][] loadArrayFromFile( InputStream in ) throws
+        IOException {
 	// better class for this? combine w/ getProperty
 	List rows = new ArrayList();
 	BufferedReader reader = new BufferedReader( new InputStreamReader( in ) );
@@ -621,7 +621,7 @@ public static double[][] loadArrayFromFile( InputStream in ) throws FileNotFound
  * @throws IOException
  */
 public static boolean[][] loadBooleanArrayFromFile( InputStream in )
-		throws FileNotFoundException, IOException {
+		throws IOException {
 	List rows = new ArrayList();
 	BufferedReader reader = new BufferedReader( new InputStreamReader( in ) );
 	for ( String line = reader.readLine(); line != null; line = reader.readLine() ) {

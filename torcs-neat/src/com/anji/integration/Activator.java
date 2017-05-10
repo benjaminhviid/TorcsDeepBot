@@ -34,52 +34,52 @@ public interface Activator extends XmlPersistable {
  * @see Activator#next(double[])
  * @see Activator#next(double[][])
  */
-public double[] next();
+double[] next();
 
 /**
  * @param stimuli
  * @return double[] output array given input <code>stimuli</code>.
  */
-public double[] next( double[] stimuli );
+double[] next(double[] stimuli);
 
 /**
  * @param stimuli
  * @return double[][] sequence of output arrays given input sequence <code>stimult</code>.
  */
-public double[][] next( double[][] stimuli );
+double[][] next(double[][] stimuli);
 
 /**
  * @return String XML representation of object.
  */
-public String toXml();
+String toXml();
 
 /**
  * reset object to initial state
  */
-public void reset();
+void reset();
 
 /**
  * @return String identifier, preferably unique, of object.
  */
-public String getName();
+String getName();
 
 /**
  * @return min response value
  */
-public double getMinResponse();
+double getMinResponse();
 
 /**
  * @return max response value
  */
-public double getMaxResponse();
+double getMaxResponse();
 
 /**
  * @return dimension of input array
  */
-public int getInputDimension();
+int getInputDimension();
 
 /**
  * @return dimension of output array
  */
-public int getOutputDimension();
+int getOutputDimension();
 }

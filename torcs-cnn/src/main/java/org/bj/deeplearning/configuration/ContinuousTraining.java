@@ -30,7 +30,7 @@ public abstract class ContinuousTraining implements Trainable {
 	private boolean outputDeadNeurons, saveModel, collectStats, disableStatsWhenTraining;
     File statsFile;
 
-	public ContinuousTraining() throws FileNotFoundException, IOException {
+	public ContinuousTraining() throws IOException {
 		init();
 	}
 
@@ -71,7 +71,7 @@ public abstract class ContinuousTraining implements Trainable {
 		}
 	}
 
-	protected void init() throws FileNotFoundException, IOException {
+	protected void init() throws IOException {
 		Properties projectProperties = PropertiesReader.getProjectProperties();
 		width = Integer.parseInt(projectProperties.getProperty("training.image.width"));
 		height = Integer.parseInt(projectProperties.getProperty("training.image.height"));
@@ -90,11 +90,11 @@ public abstract class ContinuousTraining implements Trainable {
 	}
 
 	protected void initConfig() {
-		configuration = BuilderFactory.getVeryShallowConvNet(height, width, featureCount).build();
+		configuration = BuilderFactory.getShallowConvNet(height, width, featureCount).build();
 
 	}
 
-	protected void initNetwork() throws FileNotFoundException, IOException {
+	protected void initNetwork() throws IOException {
 		if(PropertiesReader.getProjectProperties().getProperty("training.continueFromLatestModel").equals("true")) {
 			model = ModelSerializer.restoreMultiLayerNetwork(new FileInputStream(FileSystem.getPathOfLatestModelFile().toString()));
 			latestEpoch = FileSystem.findLatestModelId();
@@ -108,9 +108,9 @@ public abstract class ContinuousTraining implements Trainable {
 		if (collectStats) {
             StatsStorage statsStorage = new FileStatsStorage(statsFile);
             if (disableStatsWhenTraining)
-                model.setListeners(new IterationTimeListener(1), new ScoreIterationListener(1));
+                model.setListeners(new IterationTimeListener(100), new ScoreIterationListener(100));
             else
-                model.setListeners(new IterationTimeListener(1), new StatsListener(statsStorage), new ScoreIterationListener(1));
+                model.setListeners(new IterationTimeListener(), new StatsListener(statsStorage), new ScoreIterationListener());
 
         }
 

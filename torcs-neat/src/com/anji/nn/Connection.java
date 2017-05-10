@@ -29,20 +29,20 @@ public interface Connection {
 	/**
 	 * base XML tag
 	 */
-	public final static String XML_TAG = "connection";
+    String XML_TAG = "connection";
 
 	/**
 	 * @return double value carried on this connection from incoming neuron
 	 */
-	public double read();
+    double read();
 
 	/**
 	 * @return String representation of object
 	 */
-	public String toXml();
+    String toXml();
 
 	/**
 	 * @return number corresponding to cost of activation in resources
 	 */
-	public long cost();
+    long cost();
 }

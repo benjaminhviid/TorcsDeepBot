@@ -22,14 +22,13 @@ public class TorcsFitnessFunction implements BulkFitnessFunction, Configurable {
 	private TorcsNeatAI bestBot;
 	private PrintWriter writer;
 
-	@Override
 	public void init(Properties props) throws Exception {
 		// TODO Auto-generated method stub
 		activatorFactory = (ActivatorTranscriber) props.newObjectProperty( TRANSCRIBER_CLASS_KEY );
 		bestBot = null;
 		
 	}
-	@Override
+	
 	public void evaluate(List subjects) {
 		// TODO Auto-generated method stub
 		System.out.println("evaluating");
@@ -38,7 +37,7 @@ public class TorcsFitnessFunction implements BulkFitnessFunction, Configurable {
 		try{
 			writer = new PrintWriter("generation.txt", "UTF-8");
 			if (recordSession)
-				DataCollector.instance().StartDataCollection(dataCollectionInterval);
+				DataCollector.StartDataCollection(dataCollectionInterval);
 
 			for (int i = 0; i < subjects.size(); i++){
 				try{
@@ -64,7 +63,6 @@ public class TorcsFitnessFunction implements BulkFitnessFunction, Configurable {
 		
 	}
 
-	@Override
 	public int getMaxFitnessValue() {
 		// TODO Auto-generated method stub
 		return 2580; // aalborg meters

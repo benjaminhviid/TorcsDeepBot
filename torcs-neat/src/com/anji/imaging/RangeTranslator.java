@@ -35,6 +35,6 @@ public interface RangeTranslator {
 	 * @param value
 	 * @return translated value
 	 */
-	public double translate( double value );
+    double translate(double value);
 }
 

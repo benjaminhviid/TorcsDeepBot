@@ -43,7 +43,7 @@ public class TorcsNeatAI implements Comparable<TorcsNeatAI>{
 			ActivatorTranscriber activator_transcriber = (ActivatorTranscriber)properties.newObjectProperty(TRANSCRIBER_CLASS_KEY);
 			a = activator_transcriber.newActivator(chromosome);
 		}
-		catch(InvalidConfigurationException | IOException | TranscriberException e){
+		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
@@ -76,7 +76,6 @@ public class TorcsNeatAI implements Comparable<TorcsNeatAI>{
 		
 	}
 		
-	@Override
 	public int compareTo(TorcsNeatAI o) {
 		// TODO Auto-generated method stub
 		return fitness.compareTo(o.fitness);	

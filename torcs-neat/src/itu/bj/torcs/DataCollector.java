@@ -4,7 +4,6 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -131,7 +130,7 @@ public class DataCollector {
 	static void GetData(){
 		try {
 			BufferedImage image = new Robot().createScreenCapture(new Rectangle(0, offsetY, width, height));
-			BufferedImage resized = resize(image, 280, 210);
+			BufferedImage resized = resize(image, 80, 60);
 
 			String screenshotFolder = "/screenshots";
 			String screenshotDir = newDir + screenshotFolder;

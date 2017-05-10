@@ -22,7 +22,7 @@ public class AccuracyFinder {
 
 	private static final int BATCH_SIZE = 250;
 
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	public static void main(String[] args) throws IOException {
 		Trainer.init();
 		FileSystem.createFolders();
 

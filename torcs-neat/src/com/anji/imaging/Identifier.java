@@ -35,20 +35,20 @@ public interface Identifier {
  * @return confidence between 0 (certain it is not a match) and 1 (certain it is a match)
  * @throws IOException
  */
-public float identify( File imgFile ) throws IOException;
+float identify(File imgFile) throws IOException;
 
 /**
  * dispose of any remaining resources; identify must not be called again after dispose
  */
-public void dispose();
+void dispose();
 
 /**
  * @return number of steps used by previous call to <code>identify(File)</code>
  */
-public int getStepNum();
+int getStepNum();
 
 /**
  * @return indicates relative cost in resources of this identifier
  */
-public long cost();
+long cost();
 }

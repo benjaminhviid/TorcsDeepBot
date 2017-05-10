@@ -34,10 +34,10 @@ public interface Transcriber {
  * @return phenotype
  * @throws TranscriberException
  */
-public Object transcribe( Chromosome c ) throws TranscriberException;
+Object transcribe(Chromosome c) throws TranscriberException;
 
 /**
  * @return class of phenotype returned by <code>transcribe()</code>
  */
-public Class getPhenotypeClass();
+Class getPhenotypeClass();
 }

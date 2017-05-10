@@ -28,15 +28,15 @@ public interface XmlPersistable {
 /**
  * @return XML String representation of this object
  */
-public String toXml();
+String toXml();
 
 /**
  * @return root tag
  */
-public String getXmlRootTag();
+String getXmlRootTag();
 
 /**
  * @return id
  */
-public String getXmld();
+String getXmld();
 }
