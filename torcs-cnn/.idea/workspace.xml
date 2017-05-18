@@ -2,34 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25d4bede-b47a-460e-86c0-8aa3bb15c54b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/RunType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/listener/ScoreLogListener.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/continuous (copy)/UIStorageExampleStats.dl4j" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/continuous (copy)/UIStorageExampleStats.dl4j.wal.0" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/shallow 0001/UIStorageExampleStats.dl4j" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/shallow 0001/UIStorageExampleStats.dl4j.wal.0" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/models/shallow 0001/config" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/torcsdata/screenshots/screenshot16.jpg" afterPath="$PROJECT_DIR$/src/main/resources/torcsdata/screenshots/screenshot16.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../torcs-neat/bin/itu/bj/torcs/CNNBot.class" afterPath="$PROJECT_DIR$/../torcs-neat/bin/itu/bj/torcs/CNNBot.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../torcs-neat/bin/itu/bj/torcs/MyThread.class" afterPath="$PROJECT_DIR$/../torcs-neat/bin/itu/bj/torcs/MyThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../torcs-neat/bin/itu/bj/torcs/RunTorcs.class" afterPath="$PROJECT_DIR$/../torcs-neat/bin/itu/bj/torcs/RunTorcs.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../config/project.properties" afterPath="$PROJECT_DIR$/../config/project.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/botlog.txt" afterPath="$PROJECT_DIR$/botlog.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/BuilderFactory.java" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/BuilderFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/ContinuousTraining.java" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/configuration/ContinuousTraining.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/FileSystem.java" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/FileSystem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingData.java" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingDataHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/dataobjects/TrainingDataHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Evaluator.java" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Evaluator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/LayerActivator.java" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/LayerActivator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Trainer.java" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/executables/Trainer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/iterator/BaseIterator.java" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/iterator/BaseIterator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/tools/ImageTool.java" afterPath="$PROJECT_DIR$/src/main/java/org/bj/deeplearning/tools/ImageTool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/torcsdata/trainingdata.csv" afterPath="$PROJECT_DIR$/src/main/resources/torcsdata/trainingdata.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../torcs-neat/src/itu/bj/torcs/CNNBot.java" afterPath="$PROJECT_DIR$/../torcs-neat/src/itu/bj/torcs/CNNBot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../torcs-neat/src/itu/bj/torcs/Client.java" afterPath="$PROJECT_DIR$/../torcs-neat/src/itu/bj/torcs/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../torcs-neat/src/itu/bj/torcs/RunTorcs.java" afterPath="$PROJECT_DIR$/../torcs-neat/src/itu/bj/torcs/RunTorcs.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
