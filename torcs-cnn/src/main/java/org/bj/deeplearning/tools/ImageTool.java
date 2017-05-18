@@ -211,17 +211,15 @@ public class ImageTool extends RandomAccessFile {
             for(int x = 0; x < iw; x++) {
 
                 int pixel = image.getRGB(x, y);
-                Color color = new Color(pixel);
                 // Get pixels
-                int red = color.getRed(); //(pixel >> 16) & 0xFF;
-                int green = color.getGreen();//(pixel >> 8) & 0xFF;
-                int blue = color.getBlue();//pixel & 0xFF;
+                int red = (pixel >> 16) & 0xFF;
+                int green =(pixel >> 8) & 0xFF;
+                int blue = pixel & 0xFF;
 
                 bytes[index++] = (byte) red;
                 bytes[index++] = (byte) green;
                 bytes[index++] = (byte) blue;
-               //
-                 System.out.println("argb: " +  (byte) red + ", " + (byte)green + ", " + (byte)blue);
+                 //System.out.println("argb: " +  (byte) red + ", " + (byte)green + ", " + (byte)blue);
             }
         }
 
@@ -258,6 +256,7 @@ public class ImageTool extends RandomAccessFile {
                     bytes[index++] = (byte) red;
                     bytes[index++] = (byte) green;
                     bytes[index++] = (byte) blue;
+
                 }
             }
             return bytes;

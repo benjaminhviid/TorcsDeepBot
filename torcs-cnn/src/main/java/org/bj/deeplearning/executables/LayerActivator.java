@@ -66,7 +66,7 @@ public class LayerActivator {
 		
 		System.out.println("Output of output layer:");
 		System.out.println(Arrays.toString(output));
-		System.out.println("Output of grount truths:");
+		System.out.println("Output of ground truths:");
 		System.out.println(Arrays.toString(image.getFeatures()));
 		
 		Pair<Integer, Double> featureInfo = findHighestIdAndValue(image.getFeatures());
