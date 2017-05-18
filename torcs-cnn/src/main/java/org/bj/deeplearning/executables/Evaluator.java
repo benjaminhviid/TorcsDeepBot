@@ -10,7 +10,9 @@ import java.util.List;
 
 import com.sun.org.apache.xpath.internal.operations.Mult;
 import org.apache.commons.lang.ArrayUtils;
+import org.bj.deeplearning.dataobjects.RunType;
 import org.bj.deeplearning.dataobjects.TrainingDataHandler;
+import org.bj.deeplearning.listener.ScoreLogListener;
 import org.bj.deeplearning.tools.INDArrayTool;
 import org.bj.deeplearning.tools.NNTool;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
@@ -19,6 +21,7 @@ import org.bj.deeplearning.dataobjects.FileSystem;
 import org.bj.deeplearning.dataobjects.TrainingData;
 import org.bj.deeplearning.tools.ImageTool;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.factory.Nd4j;
 
 public class Evaluator {
@@ -34,7 +37,10 @@ public class Evaluator {
 		} else {
 			modelPath = FileSystem.getPathOfModelFile(Integer.parseInt(args[0]));
 		}
+		TrainingDataHandler.runType = RunType.TEST;
+
 		MultiLayerNetwork network = ModelSerializer.restoreMultiLayerNetwork(new FileInputStream(modelPath.toFile()));
+		network.setListeners(new ScoreLogListener(10, "evaluator"));
 		//System.out.println(network.getLayerWiseConfigurations().toString());
 		//System.out.format("Evaluating model %s \n", modelPath.toString());
 		double[] accuracy = getAccuracy(network);
@@ -49,7 +55,8 @@ public class Evaluator {
 
 	public static double[] getAccuracy(MultiLayerNetwork network) throws IOException {
 		Files.createDirectories(Paths.get("misses"));
-		int firstId = Trainer.lastValidationIndex()+1;
+		//int firstId = Trainer.lastValidationIndex()+1;
+		int firstId = 1;
 		int lastId = Trainer.lastTestIndex();
 		if(lastId-firstId < 0) {
 			throw new IllegalArgumentException("Test set is empty");
@@ -64,7 +71,7 @@ public class Evaluator {
 			int toId = Math.min(fromId + BATCH_SIZE, lastId);
 			testSet = FileSystem.load(fromId, toId);
 			for(TrainingData td : testSet) {
-			    //System.out.println("Test id: " + td.getId());
+			    System.out.println("Test id: " + td.getId());
 				double[] groundTruths = td.getFeatures();
                 for (double d : groundTruths){
                     System.out.print (String.format( "%.2f", d ) + " ");
@@ -72,7 +79,6 @@ public class Evaluator {
                 System.out.println("");
                 INDArray in = Nd4j.create(ImageTool.toScaledDoubles(td.getPixelData()), new int[] {1, 3, td.getWidth(), td.getHeight()});
                 INDArray output = network.output(in, false);
-
 
                 for (double d : INDArrayTool.toFlatDoubleArray(output)){
                     System.out.print (String.format( "%.2f", d ) + " ");
@@ -105,13 +111,13 @@ public class Evaluator {
 
 		INDArray in = Nd4j.create(ImageTool.toScaledDoubles(pixels), new int[] {1, 3, TrainingDataHandler.getWidth(), TrainingDataHandler.getHeight()});
 		INDArray out = net.output(in, false);
+
 		double[] output = new double[out.length()];
 
 		for(int i = 0; i < out.length(); i++) {
 			output[i] = out.getDouble(i);
 			//System.out.print(output[i] + " ");
 		}
-		//System.out.println("");
 		return output;
 	}
 

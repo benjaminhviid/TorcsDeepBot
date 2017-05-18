@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Time;
+import java.time.Instant;
 import java.util.Properties;
 
+import org.bj.deeplearning.listener.ScoreLogListener;
 import org.deeplearning4j.api.storage.StatsStorage;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
@@ -90,7 +93,7 @@ public abstract class ContinuousTraining implements Trainable {
 	}
 
 	protected void initConfig() {
-		configuration = BuilderFactory.getShallowConvNet(height, width, featureCount).build();
+		configuration = BuilderFactory.getDeepConvNet(height, width, featureCount).build();
 
 	}
 
@@ -108,10 +111,10 @@ public abstract class ContinuousTraining implements Trainable {
 		if (collectStats) {
             StatsStorage statsStorage = new FileStatsStorage(statsFile);
             if (disableStatsWhenTraining)
-                model.setListeners(new IterationTimeListener(100), new ScoreIterationListener(100));
-            else
+               model.setListeners(new IterationTimeListener(), new ScoreIterationListener(), new ScoreLogListener(100, "deepnet"+ Instant.now().toString()));
+				//model.setListeners(new IterationTimeListener(), new ScoreIterationListener());
+			else
                 model.setListeners(new IterationTimeListener(), new StatsListener(statsStorage), new ScoreIterationListener());
-
         }
 
     }

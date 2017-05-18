@@ -6,6 +6,8 @@ import org.bj.deeplearning.configuration.ContinuousSequentialTraining;
 import org.bj.deeplearning.configuration.EarlyStoppingTraining;
 import org.bj.deeplearning.configuration.Trainable;
 import org.bj.deeplearning.dataobjects.FileSystem;
+import org.bj.deeplearning.dataobjects.RunType;
+import org.bj.deeplearning.dataobjects.TrainingDataHandler;
 import org.bj.deeplearning.iterator.CSVIterator;
 import org.bj.deeplearning.tools.PropertiesReader;
 //import org.nd4j.jita.conf.CudaEnvironment;
@@ -33,6 +35,7 @@ public class Trainer {
 	}
 
 	private static void doTrain() throws IOException {
+		TrainingDataHandler.runType = RunType.TRAINING;
 		DataSetIterator trainIterator = getIterator(batchSize, trainSize);
 		DataSetIterator testIterator = getIterator(batchSize, testSize);
 
@@ -116,6 +119,9 @@ public class Trainer {
 	}
 
 	public static int lastTestIndex() {
-		return lastValidationIndex() + testSize;
+		//return lastValidationIndex() + testSize;
+		return testSize;
+
+
 	}
 }

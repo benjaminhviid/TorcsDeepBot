@@ -26,13 +26,13 @@ private int index = 0;
    		return TrainingDataHandler.getNumberOfGroundTruths();
 	}
 
-	public TrainingData(int id, TrainingDataType type){
+	public TrainingData(int id, TrainingDataType trainingDataType, RunType runType){
 		int _id = id;
 		if (_id == 0)
 			_id = 1;
 
-		String[] sample = TrainingDataHandler.getSample(_id);
-		TrainingData.type = type;
+		String[] sample = TrainingDataHandler.getSample(_id, TrainingDataHandler.runType);
+		TrainingData.type = trainingDataType;
 
         speed = Double.parseDouble(sample[index++]);
         speed = clamp(speed, 0, 200);
@@ -43,11 +43,11 @@ private int index = 0;
 		angle = map(angle, -Math.PI, Math.PI, 0.0, 1.0);
 
 		// when clamping trackpos we use -2, 2, as we give 2 x track width as track boundary in each side
-		if (type == TrainingDataType.MINIMAL || type == TrainingDataType.EXTENSIVE){
+		if (trainingDataType == TrainingDataType.MINIMAL || trainingDataType == TrainingDataType.EXTENSIVE){
 			double trackPos = Double.parseDouble(sample[index++]);
 			marking_M = map(clamp(trackPos, -2, 2), -2.0, 2.0, 0.0, 1.0);
 
-			if (type == TrainingDataType.EXTENSIVE) {
+			if (trainingDataType == TrainingDataType.EXTENSIVE) {
 				marking_L = 0.9 - map(clamp(trackPos, -1.0, 1.0), -1.0, 1.0, 0.0, 1.0);
 				marking_R = 0.9 - map(Utils.clamp(trackPos, -1, 1), -1.0, 1.0, 0.1, 0.9);
 				marking_R = map(marking_R, 0.1, 0.9, 0.9, 0.1);
@@ -56,7 +56,7 @@ private int index = 0;
 		//
 		}
 
-		if (type == TrainingDataType.SHALLOW) {
+		if (trainingDataType == TrainingDataType.SHALLOW) {
 			marking_M = Double.parseDouble(sample[index++]);
 			marking_M = clamp(marking_M, 0, 1.5);
 			marking_M = map(marking_M, 0, 1.5, 0, 1);
@@ -66,13 +66,13 @@ private int index = 0;
 			marking_R = map(marking_R, 0, 1.5, 0, 1);
 		}
 
-		if (type == TrainingDataType.EXTENSIVE) {
+		if (trainingDataType == TrainingDataType.EXTENSIVE) {
 			dist_L = Double.parseDouble(sample[index++]);
 			dist_R = Double.parseDouble(sample[index++]);
 
 		}
 
-		if (type == TrainingDataType.SHALLOW) {
+		if (trainingDataType == TrainingDataType.SHALLOW) {
 			height = (int) Double.parseDouble(sample[index++]);
 			width = (int) Double.parseDouble(sample[index++]);
 			this.id = (int) Double.parseDouble(sample[index++]);
@@ -83,8 +83,12 @@ private int index = 0;
         	this.id = Integer.parseInt(sample[index++]);
 
 		}
-		pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
-        features = calculateFeatures();
+		if(runType == RunType.TRAINING)
+			pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
+        else
+			pixelData = ImageTool.bufferedImageToByteArray(TrainingDataHandler.TEST_SCREENSHOTS_PATH + "screenshot" + id + ".jpg");
+
+		features = calculateFeatures();
     }
 
 	// used in FileSystem

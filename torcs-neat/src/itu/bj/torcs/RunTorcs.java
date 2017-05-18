@@ -8,7 +8,7 @@ public class RunTorcs {
 	public static void main(String[] args) {
 
 		String[] arguments = {
-				"itu.bj.torcs.SimpleDriver",
+				"itu.bj.torcs.CNNBot",
 				"host:localhost",
 				"port:3001",
 				"maxEpisodes:1",

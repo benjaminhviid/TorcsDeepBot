@@ -24,13 +24,13 @@ import org.nd4j.linalg.factory.Nd4j;
 public class LayerActivator {
 	public static void main(String[] args) throws IOException {
 		FileSystem.createFolders();
-		if(args.length != 2) {
+		/*if(args.length != 2) {
 			System.err.println("Expected 2 arguments, the model number, and the id of the image to evaluate on.");
 			System.exit(1);
 		}
-		
+		*/
 		File networkFile = Paths.get("models", "continuous", "model2.bin").toFile();
-		int[] imageIds = new int[] { 47, 52, 55, 139, 146, 192, 193, 225, 242 };
+		int[] imageIds = new int[] { 16 };
 		
 		for(int imageId : imageIds) {
 			getActivationOfLayers(networkFile, imageId);
@@ -42,7 +42,7 @@ public class LayerActivator {
 		TrainingData image = TrainingDataHandler.getTrainingData(imageId, imageId).get(0);
 		ImageTool.printColoredPngImage(image.getPixelData(), image.getWidth(), new File("image"+ imageId +".png"));
 		
-		network.output(Nd4j.create(ImageTool.toScaledDoubles(image.getPixelData()), new int[] { 1, 3, image.getWidth(), image.getHeight()}), false);
+		network.output(Nd4j.create(ImageTool.toScaledDoubles(image.getPixelData()), new int[] { 1, 3, 256, 256}), false);
 		int convLayers = NNTool.numberOfConvolutionalLayers(network);
 		
 		//Save convolutional activations as images

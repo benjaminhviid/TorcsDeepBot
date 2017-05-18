@@ -9,6 +9,7 @@ import java.awt.image.DataBufferByte;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 import java.io.*;
+import java.util.Arrays;
 import java.util.stream.DoubleStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
@@ -38,11 +39,13 @@ public class ImageTool extends RandomAccessFile {
      * @throws IOException @see {@link javax.imageio.ImageIO#write(java.awt.image.RenderedImage, String, File)}
      */
     public static void printColoredPngImage(byte[] flattened, int width, File file) throws IOException {
+        //System.out.println(flattened.length);
+        System.out.println(Arrays.toString(flattened));
         int height = flattened.length / width / 3;
 
         byte[] flipped = flipImageBytes(flattened, width, 3);
 
-        DataBuffer buffer = new DataBufferByte(flipped, flattened.length);
+        DataBuffer buffer = new DataBufferByte(flattened, flattened.length);
 
         //3 bytes per pixel: red, green, blue
         WritableRaster raster = Raster.createInterleavedRaster(buffer, width, height, 3 * width, 3, new int[]{0, 1, 2}, null);
@@ -79,7 +82,7 @@ public class ImageTool extends RandomAccessFile {
     }
 
     private static byte toByte(double d) {
-        double cutOff = 5.0;
+        double cutOff =0.1;
         if (d < 0.0) {
             d = 0.0;
         }
@@ -208,16 +211,20 @@ public class ImageTool extends RandomAccessFile {
             for(int x = 0; x < iw; x++) {
 
                 int pixel = image.getRGB(x, y);
-
+                Color color = new Color(pixel);
                 // Get pixels
-                int red = (pixel >> 16) & 0xFF;
-                int green = (pixel >> 8) & 0xFF;
-                int blue = pixel & 0xFF;
+                int red = color.getRed(); //(pixel >> 16) & 0xFF;
+                int green = color.getGreen();//(pixel >> 8) & 0xFF;
+                int blue = color.getBlue();//pixel & 0xFF;
+
                 bytes[index++] = (byte) red;
                 bytes[index++] = (byte) green;
                 bytes[index++] = (byte) blue;
+               //
+                 System.out.println("argb: " +  (byte) red + ", " + (byte)green + ", " + (byte)blue);
             }
         }
+
             return bytes;
         } catch (IOException e) {
 
@@ -266,6 +273,9 @@ public class ImageTool extends RandomAccessFile {
 
         TrainingData images = TrainingDataHandler.getTrainingData(10, 10).get(0);
         printColoredPngImage(images.getPixelData(), images.getWidth(), new File("img.png"));
+        printGreyScalePngImage(toScaledDoubles(images.getPixelData()), images.getWidth(), new File("grey.png"));
+
+
         printRedColoredPngImage(images.getPixelData().clone(), images.getWidth(), new File("red.png"));
         printGreenColoredPngImage(images.getPixelData().clone(), images.getWidth(), new File("green.png"));
         printBlueColoredPngImage(images.getPixelData().clone(), images.getWidth(), new File("blue.png"));

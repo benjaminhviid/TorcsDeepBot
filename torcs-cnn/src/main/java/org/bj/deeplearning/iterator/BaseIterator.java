@@ -81,6 +81,8 @@ public abstract class BaseIterator implements DataSetIterator {
         return new DataSet(Nd4j.create(pixelData), Nd4j.create(groundTruthValues));
     }
 
+
+
     @Override
     public boolean asyncSupported() {
         return false;

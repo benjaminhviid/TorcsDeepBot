@@ -23,7 +23,13 @@ public class TrainingDataHandler {
 
     public static final String SCREENSHOTS_PATH = TrainingDataHandler.class.getClassLoader().getResource("torcsdata/screenshots/").getPath();
 
-    static TrainingDataType type = TrainingDataType.MINIMAL;
+    public static final String TEST_DATA_PATH = TrainingDataHandler.class.getClassLoader().getResource("torcsdata/test/trainingdata.csv").getPath();
+    public static final String TEST_SCREENSHOTS_PATH = TrainingDataHandler.class.getClassLoader().getResource("torcsdata/test/screenshots/").getPath();
+
+
+    static TrainingDataType trainingDataType = TrainingDataType.MINIMAL;
+    public static RunType runType = RunType.TEST;
+
     public static int iterator = 0;
     static Properties projectProperties = PropertiesReader.getProjectProperties();
     public static int width = Integer.parseInt(projectProperties.getProperty("training.image.width"));
@@ -111,21 +117,26 @@ public class TrainingDataHandler {
     public static List<TrainingData> getTrainingData(int fromId, int toId) {
 
         List<TrainingData> result = new ArrayList<TrainingData>();
-        getIndicesToIntList(fromId, toId).forEach(i->result.add(new TrainingData(i, type)));
+        getIndicesToIntList(fromId, toId).forEach(i->result.add(new TrainingData(i, trainingDataType, runType)));
         return result;
     }
 
     public static List<TrainingData> getRandomTrainingData(int numberOfSamples){
 
         List<TrainingData> result = new ArrayList<TrainingData>();
-        getRandomIndicesIntToList(numberOfSamples).forEach(i->result.add(new TrainingData(i, type)));
+        getRandomIndicesIntToList(numberOfSamples).forEach(i->result.add(new TrainingData(i, trainingDataType, runType)));
         return result;
     }
 
-    public static int getSampleCount(){
+    public static int getSampleCount(RunType runType){
+        String path;
+        if (runType == RunType.TRAINING)
+            path = TRAINING_DATA_PATH;
+        else
+            path = TEST_DATA_PATH;
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(TRAINING_DATA_PATH));
+            BufferedReader reader = new BufferedReader(new FileReader(path));
             int lines = 0;
             while (reader.readLine() != null) lines++;
             reader.close();
@@ -163,10 +174,10 @@ public class TrainingDataHandler {
     }*/
 
     public static int getNumberOfGroundTruths(){
-        if (type == TrainingDataType.EXTENSIVE){
+        if (trainingDataType == TrainingDataType.EXTENSIVE){
             return 7;
         }
-        else if (type == TrainingDataType.MINIMAL){
+        else if (trainingDataType == TrainingDataType.MINIMAL){
             return 2;
         }
         else{
@@ -216,7 +227,7 @@ public static List<String> getGroundTruthLabels() {
         reader.close();
         String[] headerArray = headers.split(";");
         for (String header : headerArray) {
-            if (type == TrainingDataType.MINIMAL && result.size() == 3)
+            if (trainingDataType == TrainingDataType.MINIMAL && result.size() == 3)
                 continue;
             result.add(header.trim());
         }
@@ -227,17 +238,19 @@ public static List<String> getGroundTruthLabels() {
     return result;
 }
 
-/*
-    UNTESTED
-*/
-    public static String[] getSample(int id){
+    public static String[] getSample(int id, RunType runType){
 
-        try (Stream<String> lines = Files.lines(Paths.get(TRAINING_DATA_PATH))) {
+    String path;
+    if (runType == RunType.TRAINING)
+        path = TRAINING_DATA_PATH;
+    else
+        path = TEST_DATA_PATH;
+
+        try (Stream<String> lines = Files.lines(Paths.get(path))) {
             return lines.skip(id-1).findFirst().get().split(";");
-
         }
         catch (Exception e){
-            System.out.println(e.getStackTrace());
+            System.out.println("Error at ID " + id + "\n" + e.getStackTrace());
             return new String[0];
 
         }
@@ -252,7 +265,7 @@ public static List<String> getGroundTruthLabels() {
     }
 
     public static List<Integer> getRandomIndicesIntToList(int numberOfIndices){ // TODO check that both screenshots and samples are shuffled
-        List<Integer> range = IntStream.rangeClosed(1, getSampleCount()).boxed().collect(Collectors.toList());
+        List<Integer> range = IntStream.rangeClosed(1, getSampleCount(runType)).boxed().collect(Collectors.toList());
         Collections.shuffle(range);
         return  indicesToIntList(range.parallelStream(), numberOfIndices);
     }

@@ -1,0 +1,47 @@
+public static Builder getShallowConvNet(int height, int width, int featureCount) {
+		int layerId = 0;
+		
+		Builder builder = new NeuralNetConfiguration.Builder()
+		.seed(seed)
+		.iterations(1)
+		.regularization(regularization)
+		.l2(l2)
+		.learningRate(learningRate)
+		.weightInit(WeightInit.XAVIER)
+		.activation("relu")
+		.optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
+		.updater(Updater.NESTEROVS).momentum(0.9)
+		.list()
+		.layer(layerId++, new ConvolutionLayer.Builder(6, 6)
+				.nIn(3)
+				.stride(2, 2)
+				.nOut(60)
+				.padding(3,3)
+				.build())
+		.layer(layerId++,
+				new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
+				.kernelSize(2, 2)
+				.stride(2, 2)
+				.build())
+		.layer(layerId++, new ConvolutionLayer.Builder(4, 4)
+				.nIn(60)
+				.stride(2, 2)
+				.nOut(100)
+				.padding(1,1)
+				.build())
+		.layer(layerId++,
+				new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
+				.kernelSize(2, 2)
+				.stride(2, 2)
+				.build())
+		.layer(layerId++, new DenseLayer.Builder()
+				.nOut(250)
+				.build())
+		.layer(layerId++, new OutputLayer.Builder(LossFunctions.LossFunction.SQUARED_LOSS)
+				.activation("identity")
+				.nOut(featureCount)
+				.build())
+		.backprop(true).pretrain(false)
+		.setInputType(InputType.convolutionalFlat(height, width, 3));
+		return builder;
+	}

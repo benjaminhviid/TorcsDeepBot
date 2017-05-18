@@ -1,0 +1,68 @@
+alexnet2017-05-11T21:11:51.677Z(frequency: 100 iterations)
+
+{
+  "iterationCount" : 0,
+  "l1ByParam" : { },
+  "l2ByParam" : { },
+  "layer" : {
+    "convolution" : {
+      "activationFn" : {
+        "ReLU" : { }
+      },
+      "adamMeanDecay" : "NaN",
+      "adamVarDecay" : "NaN",
+      "biasInit" : 0.0,
+      "biasLearningRate" : 0.01,
+      "convolutionMode" : "Truncate",
+      "cudnnAlgoMode" : "PREFER_FASTEST",
+      "dist" : {
+        "normal" : {
+          "mean" : 0.0,
+          "std" : 0.01
+        }
+      },
+      "dropOut" : 0.0,
+      "epsilon" : "NaN",
+      "gradientNormalization" : "RenormalizeL2PerLayer",
+      "gradientNormalizationThreshold" : 1.0,
+      "kernelSize" : [ 6, 6 ],
+      "l1" : 0.0,
+      "l1Bias" : 0.0,
+      "l2" : 0.005,
+      "l2Bias" : 0.0,
+      "layerName" : "cnn1",
+      "learningRate" : 0.01,
+      "learningRateSchedule" : null,
+      "momentum" : 0.9,
+      "momentumSchedule" : { },
+      "nin" : 3,
+      "nout" : 96,
+      "padding" : [ 3, 3 ],
+      "rho" : "NaN",
+      "rmsDecay" : "NaN",
+      "stride" : [ 2, 2 ],
+      "updater" : "NESTEROVS",
+      "weightInit" : "DISTRIBUTION"
+    }
+  },
+  "leakyreluAlpha" : 0.0,
+  "learningRateByParam" : { },
+  "learningRatePolicy" : "Step",
+  "lrPolicyDecayRate" : 0.1,
+  "lrPolicyPower" : "NaN",
+  "lrPolicySteps" : 100000.0,
+  "maxNumLineSearchIterations" : 5,
+  "miniBatch" : false,
+  "minimize" : true,
+  "numIterations" : 1,
+  "optimizationAlgo" : "STOCHASTIC_GRADIENT_DESCENT",
+  "pretrain" : false,
+  "seed" : 100,
+  "stepFunction" : null,
+  "useDropConnect" : false,
+  "useRegularization" : true,
+  "variables" : [ "0_W", "0_b", "3_W", "3_b", "6_W", "6_b", "7_W", "7_b", "8_W", "8_b", "10_W", "10_b", "11_W", "11_b", "12_W", "12_b" ]
+}
+
+0.02206294129875089
+

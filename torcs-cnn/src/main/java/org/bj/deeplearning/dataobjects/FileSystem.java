@@ -161,7 +161,7 @@ public class FileSystem {
 
 	public static TrainingData load(int id) {
 		try {
-			return new TrainingData(id, TrainingDataType.MINIMAL);
+			return new TrainingData(id, TrainingDataType.MINIMAL, TrainingDataHandler.runType);
 
 		} catch(Exception e) {
 			e.printStackTrace();

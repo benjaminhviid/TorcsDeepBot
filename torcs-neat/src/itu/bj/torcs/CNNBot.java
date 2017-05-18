@@ -86,7 +86,7 @@ public class CNNBot extends Controller {
     private float getAccel(SensorModel sensors, CNNSensorModel cnnSensors)
     {
         // checks if car is out of track
-        if (cnnSensors.getTrackPosition() < 1 && cnnSensors.getTrackPosition() > -1)
+        if (sensors.getTrackPosition() < 1 && sensors.getTrackPosition() > -1)
         {
             // reading of sensor at +5 degree w.r.t. car axis
             float rxSensor=(float) sensors.getTrackEdgeSensors()[10];
@@ -143,7 +143,6 @@ public class CNNBot extends Controller {
         int gear = getGear(sensors);
         // compute steering
         float steer = getSteer(sensors, CNNSensorModel.getInstance());
-
 
         // normalize steering
         if (steer < -1)
